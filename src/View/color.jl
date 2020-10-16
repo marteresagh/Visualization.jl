@@ -1,11 +1,9 @@
 """
-	colorview(V::Lar.Points,CV::Lar.Cells,rgb::Lar.Points)::GL.GLMesh
-
 Create the GLMesh to view points,edges,triangles and tetrahedrons with colors from each point.
 """
 function mesh_color_from_rgb(V::Lar.Points,CV::Lar.Cells,rgb::Lar.Points,alpha=1.0)::GL.GLMesh
 
-	function viewtetra(V::Lar.Points, CV::Lar.Cells,rgb,alpha)::GL.GLMesh
+	function viewtetra(V::Lar.Points, CV::Lar.Cells,rgb::Lar.Points,alpha)::GL.GLMesh
 		triangles = Array{Int64,1}[]
 		#data preparation
 		for cell in CV
@@ -72,7 +70,11 @@ function mesh_color_from_rgb(V::Lar.Points,CV::Lar.Cells,rgb::Lar.Points,alpha=1
   	ret.colors  = GL.GLVertexBuffer(colors)
   	return ret
 end
-#
+
+function points_color_from_rgb(V::Lar.Points,rgb::Lar.Points,alpha=1.0)::GL.GLMesh
+		VV = [[i] for i in 1:size(V,2)]
+		return Visualization.mesh_color_from_rgb(V::Lar.Points,VV,rgb::Lar.Points,alpha)
+end
 # """
 # All normals are displayed.
 # """

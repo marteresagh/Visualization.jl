@@ -5,7 +5,6 @@ module Visualization
     GL = ViewerGL
 	using Combinatorics
 
-
     # include code
     dirs = readdir("src")
 	for dir in dirs
@@ -20,6 +19,5 @@ module Visualization
 			end
 		end
 	end
-
-
+ 	export GL
 end # module
