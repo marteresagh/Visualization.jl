@@ -21,7 +21,7 @@ function mesh_line(LINES::Array{Hyperplane,1})
 	mesh = []
 	for line in LINES
 		pc = line.points
-		V,EV = PointClouds.DrawLine(pc.points,line.line,1.0)
+		V,EV = PointClouds.DrawLine(pc.points,line.line,0.0)
 		col = GL.COLORS[rand(1:12)]
 		push!(mesh,GL.GLGrid(V,EV,col));
 		push!(mesh,	GL.GLPoints(convert(Lar.Points,pc.points'),col));

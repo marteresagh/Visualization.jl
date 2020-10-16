@@ -1,8 +1,6 @@
 module Visualization
 
     using Common
-	using LinearAlgebraicRepresentation
-	Lar = LinearAlgebraicRepresentation
     using ViewerGL
     GL = ViewerGL
 	using Combinatorics

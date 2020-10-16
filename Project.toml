@@ -5,5 +5,4 @@ version = "0.1.0"
 
 [deps]
 Combinatorics = "861a8166-3701-5b0c-9a16-15d98fcdc6aa"
-LinearAlgebraicRepresentation = "95167b0c-186a-594b-a231-52369c6de044"
 ViewerGL = "32496ab8-9004-11e9-0205-c9e71bda7ab0"
