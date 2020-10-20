@@ -1,3 +1,5 @@
+__precompile__()
+
 module Visualization
 
     using Common
@@ -9,6 +11,6 @@ module Visualization
 	include("View/color.jl")
 	include("View/geometrytools.jl")
 
-	
+
  	export GL
 end # module
