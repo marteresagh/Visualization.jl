@@ -1,4 +1,4 @@
-#TODO da fixare 
+#TODO da fixare
 # function mesh_planes(PLANES::Array{Hyperplane,1})
 #
 # 	mesh = []
@@ -24,7 +24,7 @@ function mesh_lines(LINES::Array{Hyperplane,1})
 		V,EV = Common.DrawLine(line,0.0)
 		col = GL.COLORS[rand(1:12)]
 		push!(mesh,GL.GLGrid(V,EV,col));
-		push!(mesh,	GL.GLPoints(convert(Lar.Points,pc.points'),col));
+		push!(mesh,	GL.GLPoints(convert(Lar.Points,line.points.coordinates'),col));
 	end
 
 	return mesh
