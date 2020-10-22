@@ -57,8 +57,8 @@ uuid = "861a8166-3701-5b0c-9a16-15d98fcdc6aa"
 version = "1.0.2"
 
 [[Common]]
-deps = ["Delaunay", "LinearAlgebraicRepresentation"]
-git-tree-sha1 = "6c72e8369d792807f70f4d890605788c166a632d"
+deps = ["Delaunay", "LinearAlgebraicRepresentation", "NearestNeighbors"]
+git-tree-sha1 = "0f0c33bf9bc762d011d25824f0bcc7eda3cf0311"
 repo-rev = "master"
 repo-url = "https://github.com/marteresagh/Common.jl"
 uuid = "1e120bc2-2bd2-483a-9663-793997b3971f"
@@ -450,10 +450,10 @@ uuid = "02c8fc9c-b97f-50b9-bbe4-9be30ff0a78a"
 version = "2.9.10+3"
 
 [[XSLT_jll]]
-deps = ["Libdl", "Libgcrypt_jll", "Pkg", "XML2_jll"]
-git-tree-sha1 = "8bb981a5c4a7efc799250c46ef757cbfd6c5ba9b"
+deps = ["Artifacts", "JLLWrappers", "Libdl", "Libgcrypt_jll", "Pkg", "XML2_jll"]
+git-tree-sha1 = "2b3eac39df218762d2d005702d601cd44c997497"
 uuid = "aed1982a-8fda-507f-9586-7b0439959a61"
-version = "1.1.33+3"
+version = "1.1.33+4"
 
 [[Xorg_libX11_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg", "Xorg_libxcb_jll", "Xorg_xtrans_jll"]
