@@ -25,7 +25,7 @@ function mesh_lines(LINES::Array{Hyperplane,1})
 		col = GL.COLORS[rand(1:12)]
 
 		push!(mesh,	GL.GLPoints(convert(Lar.Points,line.points.coordinates'),col));
-		push!(mesh,GL.GLGrid(V,EV,col,1.0));
+		push!(mesh,GL.GLGrid(V,EV,GL.COLORS[12],1.0));
 	end
 
 	return mesh
