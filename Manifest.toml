@@ -57,8 +57,8 @@ uuid = "861a8166-3701-5b0c-9a16-15d98fcdc6aa"
 version = "1.0.2"
 
 [[Common]]
-deps = ["Delaunay", "LinearAlgebraicRepresentation", "NearestNeighbors"]
-git-tree-sha1 = "a44c007e7ffb04d7adfbdc89a4b86fc5d9b25f7c"
+deps = ["Delaunay", "LinearAlgebraicRepresentation", "NearestNeighbors", "Statistics"]
+git-tree-sha1 = "dfd386f6dc8b4b91c79a7c117e6782316e86390a"
 repo-rev = "master"
 repo-url = "https://github.com/marteresagh/Common.jl"
 uuid = "1e120bc2-2bd2-483a-9663-793997b3971f"
@@ -99,10 +99,10 @@ deps = ["Printf"]
 uuid = "ade2ca70-3891-5945-98fb-dc099432e06a"
 
 [[Delaunay]]
-deps = ["LinearAlgebra", "PyCall", "SparseArrays", "Test"]
-git-tree-sha1 = "921f1f3d71d4f990a3f7689ee5e65677a135ad65"
+deps = ["LinearAlgebra", "PyCall", "Random", "SparseArrays", "Test"]
+git-tree-sha1 = "e1e137a46d2752f4a1a149d53582c9b520e80c9a"
 uuid = "07eb4e4e-0c6d-46ef-bc4e-83d5e5d860a9"
-version = "1.0.1"
+version = "1.1.0"
 
 [[DelimitedFiles]]
 deps = ["Mmap"]
@@ -266,9 +266,9 @@ version = "0.9.17"
 
 [[MbedTLS]]
 deps = ["Dates", "MbedTLS_jll", "Random", "Sockets"]
-git-tree-sha1 = "426a6978b03a97ceb7ead77775a1da066343ec6e"
+git-tree-sha1 = "1c38e51c3d08ef2278062ebceade0e46cefc96fe"
 uuid = "739be429-bea8-5141-9913-cc70e7f3736d"
-version = "1.0.2"
+version = "1.0.3"
 
 [[MbedTLS_jll]]
 deps = ["Libdl", "Pkg"]
