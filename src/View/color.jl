@@ -75,6 +75,35 @@ function points_color_from_rgb(V::Lar.Points,rgb::Lar.Points,alpha=1.0)::GL.GLMe
 		VV = [[i] for i in 1:size(V,2)]
 		return Visualization.mesh_color_from_rgb(V::Lar.Points,VV,rgb::Lar.Points,alpha)
 end
+
+function points(points::Lar.Points,color=GL.COLORS[12],alpha=1.0::Float64)::GL.GLMesh
+
+	  if size(points,1) == 2
+		  points = vcat(points,zeros(size(points,2))')
+	  end
+
+      vertices = Vector{Float32}()
+      colors = Vector{Float32}()
+
+      for k=1:size(points,2)
+		point = convert(GL.Point3d,points[:,k])
+        append!(vertices,point)
+		append!(colors,GL.Point4d(color[1:3]...,alpha))
+      end
+
+      ret = GL.GLMesh(GL.GL_POINTS)
+      ret.vertices = GL.GLVertexBuffer(vertices)
+      ret.colors  = GL.GLVertexBuffer(colors)
+
+      return ret
+end
+
+
+
+function points(points,color=GL.COLORS[12],alpha=1.0::Float64)::GL.GLMesh
+	pts = hcat(points)
+	return points(pts,color,alpha)
+end
 # """
 # All normals are displayed.
 # """
