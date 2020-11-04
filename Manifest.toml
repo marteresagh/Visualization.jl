@@ -58,7 +58,7 @@ version = "1.0.2"
 
 [[Common]]
 deps = ["Delaunay", "LinearAlgebraicRepresentation", "NearestNeighbors", "Statistics"]
-git-tree-sha1 = "76e1066c0b6dd5feb1fb941a3b03dc937af5e24b"
+git-tree-sha1 = "673122c085e3f8c51f231528b576b964921137a4"
 repo-rev = "master"
 repo-url = "https://github.com/marteresagh/Common.jl"
 uuid = "1e120bc2-2bd2-483a-9663-793997b3971f"
@@ -84,9 +84,9 @@ version = "0.3.4+0"
 
 [[Conda]]
 deps = ["JSON", "VersionParsing"]
-git-tree-sha1 = "7a58bb32ce5d85f8bf7559aa7c2842f9aecf52fc"
+git-tree-sha1 = "c0647249d785f1d5139c0cc96db8f6b32f7ec416"
 uuid = "8f4d0f93-b110-5947-807f-2305c1781a2d"
-version = "1.4.1"
+version = "1.5.0"
 
 [[DataStructures]]
 deps = ["InteractiveUtils", "OrderedCollections", "Random", "Serialization", "Test"]
@@ -260,9 +260,9 @@ uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
 
 [[MathOptInterface]]
 deps = ["BenchmarkTools", "CodecBzip2", "CodecZlib", "JSON", "JSONSchema", "LinearAlgebra", "MutableArithmetics", "OrderedCollections", "SparseArrays", "Test", "Unicode"]
-git-tree-sha1 = "5a1d631e0a9087d425e024d66b9c71e92e78fda8"
+git-tree-sha1 = "4fd15565d1811be771e87a877f1e691a005d2b90"
 uuid = "b8f27783-ece8-5eb3-8dc8-9495eed66fee"
-version = "0.9.17"
+version = "0.9.18"
 
 [[MbedTLS]]
 deps = ["Dates", "MbedTLS_jll", "Random", "Sockets"]
@@ -287,9 +287,9 @@ version = "1.1.2"
 
 [[MutableArithmetics]]
 deps = ["LinearAlgebra", "SparseArrays", "Test"]
-git-tree-sha1 = "6cf09794783b9de2e662c4e8b60d743021e338d0"
+git-tree-sha1 = "c14dea152799bd0376024e3c3c1c3a6cb06764c7"
 uuid = "d8a4904e-b15c-11e9-3269-09a3773c0cb0"
-version = "0.2.10"
+version = "0.2.11"
 
 [[NaNMath]]
 git-tree-sha1 = "c84c576296d0e2fbb3fc134d3e09086b3ea617cd"
