@@ -30,3 +30,9 @@ function mesh_lines(LINES::Array{Hyperplane,1})
 
 	return mesh
 end
+
+function helper_axis(affine_matrix = Matrix{Float64}(Lar.I,4,4)::Matrix)
+	T = [0 1. 0 0; 0 0 1 0; 0 0 0 1]
+	V = Common.apply_matrix(affine_matrix,T)
+	return [GL.GLGrid(V,[[1,2]],GL.COLORS[2],1.),GL.GLGrid(V,[[1,3]],GL.COLORS[3],1.),GL.GLGrid(V,[[1,4]],GL.COLORS[4],1.)]
+end
