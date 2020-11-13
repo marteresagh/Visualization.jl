@@ -58,7 +58,7 @@ version = "1.0.2"
 
 [[Common]]
 deps = ["Delaunay", "LinearAlgebraicRepresentation", "NearestNeighbors", "Statistics"]
-git-tree-sha1 = "55de76d5cff3f4f9353f3ca90a436cd2972b170a"
+git-tree-sha1 = "4fc5a76cb10ae7c1c79c3cefd0ed91b0524053a8"
 repo-rev = "master"
 repo-url = "https://github.com/marteresagh/Common.jl"
 uuid = "1e120bc2-2bd2-483a-9663-793997b3971f"
@@ -287,9 +287,9 @@ version = "1.1.2"
 
 [[MutableArithmetics]]
 deps = ["LinearAlgebra", "SparseArrays", "Test"]
-git-tree-sha1 = "c14dea152799bd0376024e3c3c1c3a6cb06764c7"
+git-tree-sha1 = "7631203bddc2424717fa42ecda2a5fed9ff36af0"
 uuid = "d8a4904e-b15c-11e9-3269-09a3773c0cb0"
-version = "0.2.11"
+version = "0.2.12"
 
 [[NaNMath]]
 git-tree-sha1 = "c84c576296d0e2fbb3fc134d3e09086b3ea617cd"
