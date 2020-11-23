@@ -58,7 +58,7 @@ version = "1.0.2"
 
 [[Common]]
 deps = ["Delaunay", "LinearAlgebraicRepresentation", "NearestNeighbors", "Statistics"]
-git-tree-sha1 = "8bf12ea4a28d95172d05c3af8cb2c1d53dad7453"
+git-tree-sha1 = "6417c84d19c3cec402ad6539a9d36a4eecbfc33a"
 repo-rev = "master"
 repo-url = "https://github.com/marteresagh/Common.jl"
 uuid = "1e120bc2-2bd2-483a-9663-793997b3971f"
@@ -160,10 +160,10 @@ uuid = "4d00f742-c7ba-57c2-abde-4428a4b178cb"
 version = "0.7.10"
 
 [[HTTP]]
-deps = ["Base64", "Dates", "IniFile", "MbedTLS", "Sockets"]
-git-tree-sha1 = "c7ec02c4c6a039a98a15f955462cd7aea5df4508"
+deps = ["Base64", "Dates", "IniFile", "MbedTLS", "Sockets", "URIs"]
+git-tree-sha1 = "9634200f8e16554cb1620dfb20501483b873df86"
 uuid = "cd3eb016-35fb-5094-929b-558a96fad6f3"
-version = "0.8.19"
+version = "0.9.0"
 
 [[IniFile]]
 deps = ["Test"]
@@ -194,9 +194,9 @@ version = "0.21.1"
 
 [[JSONSchema]]
 deps = ["HTTP", "JSON", "ZipFile"]
-git-tree-sha1 = "a9ecdbc90be216912a2e3e8a8e38dc4c93f0d065"
+git-tree-sha1 = "b84ab8139afde82c7c65ba2b792fe12e01dd7307"
 uuid = "7d188eb4-7ad8-530c-ae41-71a32a6d4692"
-version = "0.3.2"
+version = "0.3.3"
 
 [[JuMP]]
 deps = ["Calculus", "DataStructures", "ForwardDiff", "LinearAlgebra", "MathOptInterface", "NaNMath", "Random", "SparseArrays", "Statistics"]
@@ -422,6 +422,11 @@ deps = ["Unicode"]
 git-tree-sha1 = "53a9f49546b8d2dd2e688d216421d050c9a31d0d"
 uuid = "30578b45-9adc-5946-b283-645ec420af67"
 version = "0.4.1"
+
+[[URIs]]
+git-tree-sha1 = "34091d6a4d65f80d4366a13030e415d5080a6345"
+uuid = "5c2747f8-b7ea-4ff2-ba2e-563bfd36b1d4"
+version = "1.0.1"
 
 [[UUIDs]]
 deps = ["Random", "SHA"]
