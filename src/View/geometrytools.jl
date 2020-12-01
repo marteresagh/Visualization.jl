@@ -1,4 +1,22 @@
+"""
+Generate model of normals.
+"""
+function mesh_normals(points::Lar.Points, normals::Lar.Points)
+	@assert size(points,2)==size(normals,2) "mesh_normals: not valid input"
+	n = size(points,2)
+	norm = [[i,i+n] for i in 1:n]
+	totalpoints = hcat(V,normals)
+	tnormals=similar(normals)
+	for i in 1:n
+		tnormals[:,i] = points[:,i] + normals[:,i]
+	end
+	totalpoints = hcat(points,tnormals)
+	return GL.GLGrid(totalpoints,norm,GL.Point4d(1,1,1,1))
+end
 
+"""
+Generate model of planes.
+"""
 function mesh_planes(PLANES::Array{Hyperplane,1})
 
 	mesh = []
@@ -15,7 +33,9 @@ function mesh_planes(PLANES::Array{Hyperplane,1})
 	return mesh
 end
 
-
+"""
+Generate model of lines.
+"""
 function mesh_lines(LINES::Array{Hyperplane,1})
 
 	mesh = []
@@ -30,6 +50,11 @@ function mesh_lines(LINES::Array{Hyperplane,1})
 	return mesh
 end
 
+
+"""
+An axis object to visualize the 3 axes. It's possible apply an affine transformation.
+The X axis is red. The Y axis is green. The Z axis is blue.
+"""
 function helper_axis(affine_matrix = Matrix{Float64}(Lar.I,4,4)::Matrix)
 	T = [0 1. 0 0; 0 0 1 0; 0 0 0 1]
 	V = Common.apply_matrix(affine_matrix,T)
