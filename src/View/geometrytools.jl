@@ -17,7 +17,7 @@ end
 """
 Generate model of planes.
 """
-function mesh_planes(PLANES::Array{Hyperplane,1})
+function mesh_planes(PLANES::Array{Hyperplane,1}, affine_matrix = Matrix(Lar.I,4,4))
 
 	mesh = []
 	for plane in PLANES
@@ -26,7 +26,7 @@ function mesh_planes(PLANES::Array{Hyperplane,1})
 		V = Common.intersectAABBplane(bb,plane.direction,plane.centroid)
 		FV = Common.delaunay_triangulation(V[1:2,:])
 		col = GL.COLORS[rand(1:12)]
-		push!(mesh,GL.GLGrid(V,FV,col));
+		push!(mesh,GL.GLGrid(Common.apply_matrix(affine_matrix,V),FV,col));
 		push!(mesh,	GL.GLPoints(convert(Lar.Points,pc.coordinates'),col));
 	end
 
