@@ -27,7 +27,7 @@ function mesh_planes(PLANES::Array{Hyperplane,1}, affine_matrix = Matrix(Lar.I,4
 		FV = Common.delaunay_triangulation(V[1:2,:])
 		col = GL.COLORS[rand(1:12)]
 		push!(mesh,GL.GLGrid(Common.apply_matrix(affine_matrix,V),FV,col));
-		push!(mesh,	GL.GLPoints(convert(Lar.Points,pc.coordinates'),col));
+		push!(mesh,	GL.GLPoints(convert(Lar.Points,Common.apply_matrix(affine_matrix,pc.coordinates)'),col));
 	end
 
 	return mesh
