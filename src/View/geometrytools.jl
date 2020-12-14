@@ -50,6 +50,23 @@ function mesh_lines(LINES::Array{Hyperplane,1})
 	return mesh
 end
 
+"""
+Generate model of lines.
+"""
+function mesh_circles(CIRCLES::Array{Hyperplane,1})
+
+	mesh = []
+	for circle in CIRCLES
+		V,EV = Lar.circle(circle.radius)()
+		T = Common.apply_matrix(Lar.t(circle.center...),V)
+		col = GL.COLORS[rand(1:12)]
+
+		push!(mesh,	GL.GLPoints(convert(Lar.Points,circle.inliers.coordinates'),col));
+		push!(mesh,GL.GLGrid(T,EV,GL.COLORS[12],1.0));
+	end
+
+	return mesh
+end
 
 """
 An axis object to visualize the 3 axes. It's possible apply an affine transformation.
