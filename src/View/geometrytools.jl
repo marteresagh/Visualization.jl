@@ -53,7 +53,7 @@ end
 """
 Generate model of lines.
 """
-function mesh_circles(CIRCLES::Array{Hyperplane,1})
+function mesh_circles(CIRCLES::Array{Hypersphere,1})
 
 	mesh = []
 	for circle in CIRCLES
