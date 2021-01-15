@@ -40,7 +40,7 @@ function mesh_lines(LINES::Array{Hyperplane,1})
 
 	mesh = []
 	for line in LINES
-		V,EV = Common.DrawLine(line,0.0)
+		V,EV = Common.DrawLines(line,0.0)
 		col = GL.COLORS[rand(1:12)]
 
 		push!(mesh,	GL.GLPoints(convert(Lar.Points,line.inliers.coordinates'),col));
