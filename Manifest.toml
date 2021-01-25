@@ -39,6 +39,12 @@ git-tree-sha1 = "f641eb0a4f00c343bbc32346e1217b86f3ce9dad"
 uuid = "49dc2e85-a5d0-5ad3-a950-438e2897f1b9"
 version = "0.5.1"
 
+[[ChainRulesCore]]
+deps = ["Compat", "LinearAlgebra", "SparseArrays"]
+git-tree-sha1 = "53fed426c9af1eb68e63b3999e96454c2db79757"
+uuid = "d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4"
+version = "0.9.27"
+
 [[CodecBzip2]]
 deps = ["Bzip2_jll", "Libdl", "TranscodingStreams"]
 git-tree-sha1 = "2e62a725210ce3c3c2e1a3080190e7ca491f18d7"
@@ -64,7 +70,7 @@ version = "1.0.2"
 
 [[Common]]
 deps = ["Delaunay", "LightGraphs", "LinearAlgebraicRepresentation", "NearestNeighbors", "SparseArrays", "Statistics"]
-git-tree-sha1 = "beacbf903178e6a1a2aaa0f923f715f52884e9ab"
+git-tree-sha1 = "083af8445b2d710b983f6187f692c16d20c54865"
 repo-rev = "master"
 repo-url = "https://github.com/marteresagh/Common.jl"
 uuid = "1e120bc2-2bd2-483a-9663-793997b3971f"
@@ -128,9 +134,9 @@ version = "1.0.2"
 
 [[Distances]]
 deps = ["LinearAlgebra", "Statistics"]
-git-tree-sha1 = "e8b13ba5f166e11df2de6fc283e5db7864245df0"
+git-tree-sha1 = "50e7640007e5cb752addec3876f43d909cae22bd"
 uuid = "b4f34e82-e78d-54a5-968a-f98e89d6e8f7"
-version = "0.10.0"
+version = "0.10.1"
 
 [[Distributed]]
 deps = ["Random", "Serialization", "Sockets"]
@@ -143,9 +149,9 @@ version = "0.7.1"
 
 [[ForwardDiff]]
 deps = ["CommonSubexpressions", "DiffResults", "DiffRules", "NaNMath", "Random", "SpecialFunctions", "StaticArrays"]
-git-tree-sha1 = "8de2519a83c6c1c2442c2f481dd9a8364855daf4"
+git-tree-sha1 = "c26b56e9b9f0687f7ca887f6b6ded03d269e0e35"
 uuid = "f6369f11-7733-5829-9624-2563aa707210"
-version = "0.10.14"
+version = "0.10.15"
 
 [[GLFW]]
 deps = ["GLFW_jll"]
@@ -167,9 +173,9 @@ version = "0.7.10"
 
 [[HTTP]]
 deps = ["Base64", "Dates", "IniFile", "MbedTLS", "Sockets", "URIs"]
-git-tree-sha1 = "504ca74f27377a25ebfd63b1f5e6ec3e9fb14690"
+git-tree-sha1 = "63055ee44b5c2b95ec1921edcf856c60124ff0c3"
 uuid = "cd3eb016-35fb-5094-929b-558a96fad6f3"
-version = "0.9.1"
+version = "0.9.2"
 
 [[Inflate]]
 git-tree-sha1 = "f5fc07d4e706b84f72d54eedcc1c13d92fb0871c"
@@ -193,9 +199,9 @@ uuid = "524e6230-43b7-53ae-be76-1e9e4d08d11b"
 version = "1.0.0"
 
 [[JLLWrappers]]
-git-tree-sha1 = "c70593677bbf2c3ccab4f7500d0f4dacfff7b75c"
+git-tree-sha1 = "a431f5f2ca3f4feef3bd7a5e94b8b8d4f2f647a0"
 uuid = "692b3bcd-3c85-4b1f-b108-f13ce0eb3210"
-version = "1.1.3"
+version = "1.2.0"
 
 [[JSON]]
 deps = ["Dates", "Mmap", "Parsers", "Unicode"]
@@ -304,9 +310,9 @@ version = "1.1.2"
 
 [[MutableArithmetics]]
 deps = ["LinearAlgebra", "SparseArrays", "Test"]
-git-tree-sha1 = "7631203bddc2424717fa42ecda2a5fed9ff36af0"
+git-tree-sha1 = "6b6bb8f550dc38310afd4a0af0786dc3222459e2"
 uuid = "d8a4904e-b15c-11e9-3269-09a3773c0cb0"
-version = "0.2.12"
+version = "0.2.14"
 
 [[NaNMath]]
 git-tree-sha1 = "bfe47e760d60b82b66b61d2d44128b62e3a369fb"
@@ -362,9 +368,9 @@ uuid = "9abbd945-dff8-562f-b5e8-e1ebf5ef1b79"
 
 [[PyCall]]
 deps = ["Conda", "Dates", "Libdl", "LinearAlgebra", "MacroTools", "Serialization", "VersionParsing"]
-git-tree-sha1 = "b6dff5fa725eff4f775f472acd86756d6e31fb02"
+git-tree-sha1 = "dd1a970b543bd02efce2984582e996af28cab27f"
 uuid = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
-version = "1.92.1"
+version = "1.92.2"
 
 [[QHull]]
 deps = ["Polyhedra", "PyCall", "StaticArrays"]
@@ -409,10 +415,10 @@ deps = ["LinearAlgebra", "Random"]
 uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 
 [[SpecialFunctions]]
-deps = ["OpenSpecFun_jll"]
-git-tree-sha1 = "7286f31f27e3335cba31c618ac344a35eceac060"
+deps = ["ChainRulesCore", "OpenSpecFun_jll"]
+git-tree-sha1 = "75394dbe2bd346beeed750fb02baa6445487b862"
 uuid = "276daf66-3868-5448-9aa4-cd146d93841b"
-version = "1.1.0"
+version = "1.2.1"
 
 [[StaticArrays]]
 deps = ["LinearAlgebra", "Random", "Statistics"]
@@ -436,9 +442,9 @@ version = "0.9.5"
 
 [[Triangle]]
 deps = ["BinDeps", "Libdl"]
-git-tree-sha1 = "7ce431902e799d06188188f7ffa7a0281fe0e8a6"
+git-tree-sha1 = "ddfa28d6c66ee8e195680a8c419f3cf230b7c91e"
 uuid = "56f361f5-126b-55db-87fb-1c71988fcde4"
-version = "0.3.0"
+version = "0.3.1"
 
 [[URIParser]]
 deps = ["Unicode"]
@@ -447,9 +453,9 @@ uuid = "30578b45-9adc-5946-b283-645ec420af67"
 version = "0.4.1"
 
 [[URIs]]
-git-tree-sha1 = "bc331715463c41d601cf8bfd38ca70a490af5c5b"
+git-tree-sha1 = "7855809b88d7b16e9b029afd17880930626f54a2"
 uuid = "5c2747f8-b7ea-4ff2-ba2e-563bfd36b1d4"
-version = "1.1.0"
+version = "1.2.0"
 
 [[UUIDs]]
 deps = ["Random", "SHA"]
