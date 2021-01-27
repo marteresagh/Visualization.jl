@@ -104,21 +104,22 @@ function points(points,color=GL.COLORS[12],alpha=1.0::Float64)::GL.GLMesh
 	pts = hcat(points)
 	return points(pts,color,alpha)
 end
-# """
-# All normals are displayed.
-# """
-# function viewnormals(V,normals)
-#     @assert size(V,2)==size(normals,2) "computenormals: not valid input"
-#     n=size(V,2)
-#     norm = [[i,i+n] for i in 1:n]
-#     totalpoints = hcat(V,normals)
-#     #le normali vanno traslate nel punto
-#     tnormals=similar(normals)
-#     for i in 1:n
-#         tnormals[:,i] = V[:,i]+normals[:,i]
-#     end
-#     totalpoints = hcat(V,tnormals)
-#     return [GL.GLPoints(convert(Lar.Points,V'),GL.COLORS[12]),
-#             GL.GLGrid(totalpoints,norm,GL.Point4d(1,1,1,1))]
-#
-# end
+
+"""
+All normals are displayed.
+"""
+function viewnormals(V,normals)
+    @assert size(V,2)==size(normals,2) "computenormals: not valid input"
+    n=size(V,2)
+    norm = [[i,i+n] for i in 1:n]
+    totalpoints = hcat(V,normals)
+    #le normali vanno traslate nel punto
+    tnormals=similar(normals)
+    for i in 1:n
+        tnormals[:,i] = V[:,i]+normals[:,i]
+    end
+    totalpoints = hcat(V,tnormals)
+    return [GL.GLPoints(convert(Lar.Points,V'),GL.COLORS[12]),
+            GL.GLGrid(totalpoints,norm,GL.Point4d(1,1,1,1))]
+
+end
