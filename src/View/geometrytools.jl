@@ -1,11 +1,11 @@
 """
 Generate model of normals.
 """
-function mesh_normals(points::Lar.Points, normals::Lar.Points)
+function mesh_normals(points::Lar.Points, normals::Lar.Points; s=1.::Float64)
 	@assert size(points,2) == size(normals,2) "mesh_normals: not valid input"
 	n = size(points,2)
 	norm = [[i,i+n] for i in 1:n]
-	totalpoints = hcat(V,normals)
+	totalpoints = hcat(points,normals)
 	tnormals = similar(normals)
 	for i in 1:n
 		tnormals[:,i] = points[:,i] + normals[:,i]
