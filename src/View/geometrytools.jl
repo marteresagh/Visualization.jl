@@ -23,7 +23,7 @@ function mesh_planes(PLANES::Array{Hyperplane,1}, affine_matrix = Matrix(Lar.I,4
 	for plane in PLANES
 		pc = plane.inliers
 		bb = Common.boundingbox(pc.coordinates)#.+([-u,-u,-u],[u,u,u])
-		V = Common.intersectAABBplane(bb,plane.direction,plane.centroid)
+		V = Common.box_intersects_plane(bb,plane.direction,plane.centroid)
 		FV = Common.delaunay_triangulation(V[1:2,:])
 		col = GL.COLORS[rand(1:12)]
 		push!(mesh,GL.GLGrid(Common.apply_matrix(affine_matrix,V),FV,col));
