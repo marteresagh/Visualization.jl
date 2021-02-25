@@ -17,14 +17,12 @@ end
 """
 Generate model of planes.
 """
-function mesh_planes(PLANES::Array{Hyperplane,1}, affine_matrix = Matrix(Lar.I,4,4))
+function mesh_planes(PLANES::Array{Hyperplane,1}, affine_matrix = Matrix(Lar.I,4,4); box_oriented = true)
 
 	mesh = []
 	for plane in PLANES
 		pc = plane.inliers
-		bb = Common.boundingbox(pc.coordinates)#.+([-u,-u,-u],[u,u,u])
-		V = Common.box_intersects_plane(bb,plane.direction,plane.centroid)
-		FV = Common.delaunay_triangulation(V[1:2,:])
+		V,EV,FV = Common.DrawPlanes(plane; box_oriented=box_oriented)
 		col = GL.COLORS[rand(1:12)]
 		push!(mesh,GL.GLGrid(Common.apply_matrix(affine_matrix,V),FV,col));
 		push!(mesh,	GL.GLPoints(convert(Lar.Points,Common.apply_matrix(affine_matrix,pc.coordinates)'),col));
@@ -40,7 +38,7 @@ function mesh_lines(LINES::Array{Hyperplane,1})
 
 	mesh = []
 	for line in LINES
-		V,EV = Common.DrawLines(line,0.0)
+		V,EV = Common.DrawLines(line)
 		col = GL.COLORS[rand(1:12)]
 
 		push!(mesh,	GL.GLPoints(convert(Lar.Points,line.inliers.coordinates'),col));
