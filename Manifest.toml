@@ -70,7 +70,7 @@ version = "1.0.2"
 
 [[Common]]
 deps = ["Delaunay", "LightGraphs", "LinearAlgebraicRepresentation", "NearestNeighbors", "QHull", "SparseArrays", "Statistics", "Triangulate"]
-git-tree-sha1 = "13e3ddf516b4984833145cfc34e3823e54a75e40"
+git-tree-sha1 = "b539e991fd83ec682b3199a419d861d00fd98b0c"
 repo-rev = "master"
 repo-url = "https://github.com/marteresagh/Common.jl"
 uuid = "1e120bc2-2bd2-483a-9663-793997b3971f"
@@ -489,7 +489,7 @@ version = "1.2.0"
 
 [[ViewerGL]]
 deps = ["DataStructures", "GLFW", "LinearAlgebra", "LinearAlgebraicRepresentation", "ModernGL", "Pkg", "QHull", "SparseArrays", "StaticArrays"]
-git-tree-sha1 = "810133a7a6f5f7c96361a71ddf40a3eac770eb5b"
+git-tree-sha1 = "4f0c0f5c378996caea3191151fab75956d6b8ca2"
 repo-rev = "master"
 repo-url = "https://github.com/cvdlab/ViewerGL.jl.git"
 uuid = "32496ab8-9004-11e9-0205-c9e71bda7ab0"
