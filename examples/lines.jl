@@ -13,5 +13,5 @@ line2 = Hyperplane(PointCloud(pc),[0.,1.],Common.centroid(pc))
 # VIEW
 LINES=[line1,line2]
 GL.VIEW([
-    Visualization.mesh_lines(LINES)...
+    Visualization.lines(LINES)...
 ])

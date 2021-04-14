@@ -20,7 +20,7 @@ plane3 = Hyperplane(PointCloud(pc),[0,0,1.],Common.centroid(pc))
 # VIEW
 PLANES=[plane1,plane2,plane3]
 GL.VIEW([
-    Visualization.mesh_planes(PLANES, false)...,
+    Visualization.planes(PLANES, false)...,
     Visualization.axis_helper()...,
     Visualization.axis_helper(Lar.t(Common.centroid(pc)...); x_color = GL.COLORS[6], y_color = GL.COLORS[7], z_color = GL.COLORS[5] )...
 ])
