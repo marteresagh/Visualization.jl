@@ -98,9 +98,7 @@ function points(points::Lar.Points,color=GL.COLORS[12],alpha=1.0::Float64)::GL.G
       return ret
 end
 
-
-
-function points(points,color=GL.COLORS[12],alpha=1.0::Float64)::GL.GLMesh
-	pts = hcat(points)
-	return points(pts,color,alpha)
+function points(point::Array{Float64,1},color=GL.COLORS[12],alpha=1.0::Float64)::GL.GLMesh
+	pt = hcat(point)
+	return points(pt,color,alpha)
 end
