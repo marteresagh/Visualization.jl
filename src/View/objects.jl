@@ -1,7 +1,9 @@
 """
+	planes(PLANES::Array{Hyperplane,1}, box_oriented = true; affine_matrix = Matrix(Lar.I,4,4))
+
 Generate model of planes.
 """
-function mesh_planes(PLANES::Array{Hyperplane,1}, box_oriented = true; affine_matrix = Matrix(Lar.I,4,4))
+function planes(PLANES::Array{Hyperplane,1}, box_oriented = true; affine_matrix = Matrix(Lar.I,4,4))
 
 	mesh = []
 	for plane in PLANES
@@ -16,9 +18,11 @@ function mesh_planes(PLANES::Array{Hyperplane,1}, box_oriented = true; affine_ma
 end
 
 """
+	lines(LINES::Array{Hyperplane,1})
+
 Generate model of lines.
 """
-function mesh_lines(LINES::Array{Hyperplane,1})
+function lines(LINES::Array{Hyperplane,1})
 
 	mesh = []
 	for line in LINES
