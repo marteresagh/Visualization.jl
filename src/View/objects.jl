@@ -1,7 +1,7 @@
 """
 Generate model of planes.
 """
-function mesh_planes(PLANES::Array{Hyperplane,1}, affine_matrix = Matrix(Lar.I,4,4); box_oriented = true)
+function mesh_planes(PLANES::Array{Hyperplane,1}, box_oriented = true; affine_matrix = Matrix(Lar.I,4,4))
 
 	mesh = []
 	for plane in PLANES
@@ -56,8 +56,12 @@ end
 An axis object to visualize the 3 orthogonal axes. It's possible apply an affine transformation.
 The X axis is red. The Y axis is green. The Z axis is blue.
 """
-function axis_helper(affine_matrix = Matrix{Float64}(Lar.I,4,4)::Matrix)
+function axis_helper(affine_matrix = Matrix{Float64}(Lar.I,4,4)::Matrix;
+			 		x_color=GL.COLORS[2]::GL.Point4d,
+					y_color=GL.COLORS[3]::GL.Point4d,
+					z_color=GL.COLORS[4]::GL.Point4d)
+
 	T = [0 1. 0 0; 0 0 1 0; 0 0 0 1]
 	V = Common.apply_matrix(affine_matrix,T)
-	return [GL.GLGrid(V,[[1,2]],GL.COLORS[2],1.),GL.GLGrid(V,[[1,3]],GL.COLORS[3],1.),GL.GLGrid(V,[[1,4]],GL.COLORS[4],1.)]
+	return [GL.GLGrid(V,[[1,2]],x_color,1.),GL.GLGrid(V,[[1,3]],y_color,1.),GL.GLGrid(V,[[1,4]],z_color,1.)]
 end

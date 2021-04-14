@@ -93,7 +93,7 @@ end
 
 Draw points.
 """
-function points(points::Lar.Points;color=GL.COLORS[12]::GL.Points4d,alpha=1.0::Float64)::GL.GLMesh
+function points(points::Lar.Points;color=GL.COLORS[12]::GL.Point4d,alpha=1.0::Float64)::GL.GLMesh
 
 	if size(points,1) == 2
 		points = vcat(points,zeros(size(points,2))')
@@ -115,7 +115,7 @@ function points(points::Lar.Points;color=GL.COLORS[12]::GL.Points4d,alpha=1.0::F
 	return ret
 end
 
-function points(point::Array{Float64,1};color=GL.COLORS[12],alpha=1.0::Float64)::GL.GLMesh
+function points(point::Array{Float64,1};color=GL.COLORS[12]::GL.Point4d,alpha=1.0::Float64)::GL.GLMesh
 	pt = hcat(point)
 	return points(pt;color=color,alpha=alpha)
 end
