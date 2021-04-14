@@ -10,13 +10,12 @@ GL.VIEW(
     ]
 )
 
-
 pc = rand(2,npoints)
 
 GL.VIEW(
     [
-    #Visualization.points(pc,GL.COLORS[2],0.3),
-    Visualization.points(pc[:,[1,2,3,4]],GL.COLORS[3],.3),
-    Visualization.points(pc[:,1],GL.COLORS[12],.3)
+    Visualization.points(pc,GL.COLORS[2],0.3),
+    Visualization.points(pc[:,[1,2,3,4]],GL.COLORS[3],1),
+    Visualization.points(pc[:,5],GL.COLORS[12],1.),
     ]
 )

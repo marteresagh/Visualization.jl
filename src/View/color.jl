@@ -1,7 +1,9 @@
 """
-Create the GLMesh to view points,edges,triangles and tetrahedrons with colors from each point.
+	mesh_color_from_rgb(V::Lar.Points,CV::Lar.Cells,rgb::Lar.Points,alpha=1.0)::GL.GLMesh
+
+Draw colored points, edges, triangles or tetrahedrons.
 """
-function mesh_color_from_rgb(V::Lar.Points,CV::Lar.Cells,rgb::Lar.Points,alpha=1.0)::GL.GLMesh
+function mesh_color_from_rgb(V::Lar.Points,CV::Lar.Cells,rgb::Lar.Points;alpha=1.0)::GL.GLMesh
 
 	function viewtetra(V::Lar.Points, CV::Lar.Cells,rgb::Lar.Points,alpha)::GL.GLMesh
 		triangles = Array{Int64,1}[]
@@ -65,40 +67,55 @@ function mesh_color_from_rgb(V::Lar.Points,CV::Lar.Cells,rgb::Lar.Points,alpha=1
 	elseif len == 4
 		return viewtetra(V,CV,rgb,alpha)
 	end
- 	ret.vertices = GL.GLVertexBuffer(vertices)
-  	ret.normals  = GL.GLVertexBuffer(normals)
-  	ret.colors  = GL.GLVertexBuffer(colors)
-  	return ret
+	ret.vertices = GL.GLVertexBuffer(vertices)
+	ret.normals  = GL.GLVertexBuffer(normals)
+	ret.colors  = GL.GLVertexBuffer(colors)
+	return ret
 end
 
-function points_color_from_rgb(V::Lar.Points,rgb::Lar.Points,alpha=1.0)::GL.GLMesh
-		VV = [[i] for i in 1:size(V,2)]
-		return Visualization.mesh_color_from_rgb(V::Lar.Points,VV,rgb::Lar.Points,alpha)
+"""
+	points(V::Lar.Points,rgb::Lar.Points,alpha=1.0)::GL.GLMesh
+
+Draw colored point clouds.
+"""
+function points(V::Lar.Points,rgb::Lar.Points;alpha=1.0)::GL.GLMesh
+	VV = [[i] for i in 1:size(V,2)]
+	return Visualization.mesh_color_from_rgb(V,VV,rgb;alpha=alpha)
 end
 
-function points(points::Lar.Points,color=GL.COLORS[12],alpha=1.0::Float64)::GL.GLMesh
+function points(PC::PointCloud;alpha=1.0)::GL.GLMesh
+	return points(PC.coordinates,PC.rgbs;alpha=alpha)
+end
 
-	  if size(points,1) == 2
-		  points = vcat(points,zeros(size(points,2))')
-	  end
 
-      vertices = Vector{Float32}()
-      colors = Vector{Float32}()
+"""
+	points(points::Lar.Points,color=GL.COLORS[12]::GL.Points4d,alpha=1.0::Float64)::GL.GLMesh
 
-      for k=1:size(points,2)
+Draw points.
+"""
+function points(points::Lar.Points;color=GL.COLORS[12]::GL.Points4d,alpha=1.0::Float64)::GL.GLMesh
+
+	if size(points,1) == 2
+		points = vcat(points,zeros(size(points,2))')
+	end
+
+	vertices = Vector{Float32}()
+	colors = Vector{Float32}()
+
+	for k=1:size(points,2)
 		point = convert(GL.Point3d,points[:,k])
-        append!(vertices,point)
+		append!(vertices,point)
 		append!(colors,GL.Point4d(color[1:3]...,alpha))
-      end
+	end
 
-      ret = GL.GLMesh(GL.GL_POINTS)
-      ret.vertices = GL.GLVertexBuffer(vertices)
-      ret.colors  = GL.GLVertexBuffer(colors)
+	ret = GL.GLMesh(GL.GL_POINTS)
+	ret.vertices = GL.GLVertexBuffer(vertices)
+	ret.colors  = GL.GLVertexBuffer(colors)
 
-      return ret
+	return ret
 end
 
-function points(point::Array{Float64,1},color=GL.COLORS[12],alpha=1.0::Float64)::GL.GLMesh
+function points(point::Array{Float64,1};color=GL.COLORS[12],alpha=1.0::Float64)::GL.GLMesh
 	pt = hcat(point)
-	return points(pt,color,alpha)
+	return points(pt;color=color,alpha=alpha)
 end

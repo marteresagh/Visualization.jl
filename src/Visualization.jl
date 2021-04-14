@@ -9,7 +9,8 @@ module Visualization
 
     # include code
 	include("View/color.jl")
-	include("View/geometrytools.jl")
+	include("View/objects.jl")
+	include("View/normals.jl")
 
 
  	export GL
