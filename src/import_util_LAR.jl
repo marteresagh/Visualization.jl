@@ -4,6 +4,24 @@ const Cells = Array{Array{Int,1},1}
 const LAR = Union{ Tuple{Points, Cells},Tuple{Points, Cells, Cells} }
 const ChainOp = SparseArrays.SparseMatrixCSC{Int8,Int}
 
+"""
+	apply_matrix(affineMatrix::Matrix, V::Points) -> Points
+
+Apply affine transformation `affineMatrix` to points `V`.
+"""
+function apply_matrix(affineMatrix::Matrix, V::Points)
+	m,n = size(V)
+	W = [V; fill(1.0, (1,n))]
+	T = (affineMatrix * W)[1:m,1:n]
+	return T
+end
+
+function apply_matrix(affineMatrix::Matrix, V::Point)
+	T = reshape(V,length(V),1)
+	return apply_matrix(affineMatrix, T)
+end
+
+
 mutable struct Struct
 	body::Array
 	box

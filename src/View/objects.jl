@@ -60,12 +60,12 @@
 An axis object to visualize the 3 orthogonal axes. It's possible apply an affine transformation.
 The X axis is red. The Y axis is green. The Z axis is blue.
 """
-function axis_helper(affine_matrix = Matrix{Float64}(Geometry.I,4,4)::Matrix;
+function axis_helper(affine_matrix = Matrix{Float64}(LinearAlgebra.I,4,4)::Matrix;
 			 		x_color=COLORS[2]::Point4d,
 					y_color=COLORS[3]::Point4d,
 					z_color=COLORS[4]::Point4d)
 
 	T = [0 1. 0 0; 0 0 1 0; 0 0 0 1]
-	V = Geometry.apply_matrix(affine_matrix,T)
+	V = apply_matrix(affine_matrix,T)
 	return [GLGrid(V,[[1,2]],x_color,1.),GLGrid(V,[[1,3]],y_color,1.),GLGrid(V,[[1,4]],z_color,1.)]
 end
