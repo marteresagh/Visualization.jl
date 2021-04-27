@@ -37,7 +37,7 @@ module Visualization
 	#
 	include("GL/Viewer.jl")
 	include("GL/Geometry.jl")
-	# include("GL/GLText.jl")  # TODO eliminare Lar
+	include("GL/GLText.jl")
 	include("GL/GLColorBuffer.jl")
 
 	const GLFrame2 = GLAxis(Point3d(0,0,0),Point3d(1,1,0))
