@@ -8,5 +8,6 @@ normals = vcat(zeros(1,npoints),zeros(1,npoints),ones(1,npoints))
 
 Visualization.VIEW([
     Visualization.points(pc),
-    Visualization.normals(pc,normals; len = 0.5)
+    Visualization.normals(pc,normals; len = 0.5),
+    Visualization.axis_helper()...
 ])

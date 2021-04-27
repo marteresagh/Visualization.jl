@@ -1,7 +1,4 @@
-using LinearAlgebraicRepresentation
-Lar = LinearAlgebraicRepresentation
-using ViewerGL
-GL = ViewerGL
+using Visualization
 
 V,(VV,EV,FV,CV) = Lar.cuboidGrid([10,10,5],true)
 
