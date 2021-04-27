@@ -31,13 +31,13 @@ Matrix4() =  Matrix4(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1)
 Flatten `T`  by row: value of `Matrix3` into a 1D array,.
  # Example
  ```
- julia> T = convert(GL.Matrix3, rand(Float64, 3,3))
+ julia> T = convert(Matrix3, rand(Float64, 3,3))
  3×3 StaticArrays.MArray{Tuple{3,3},Float64,2,9}:
   0.774754  0.681844  0.642835
   0.686775  0.448813  0.0144597
   0.824035  0.438451  0.0153561
 
- julia> GL.flatten(T::GL.Matrix3)
+ julia> flatten(T::Matrix3)
  9-element Array{Float32,1}:
   0.77475363
   0.6818439
@@ -63,13 +63,13 @@ Flatten `T` by row a value of `Matrix4` into a 1D array.
 # Example
 
 ```
-julia> T = convert(GL.Matrix4, rand(Float64, 4,4))
+julia> T = convert(Matrix4, rand(Float64, 4,4))
 4×4 StaticArrays.MArray{Tuple{4,4},Float64,2,16}:
  0.23079   0.620179  0.362604   0.136963
 	...		 ...	   ...		  ...
  0.328367  0.709699  0.170108   0.848778
 
-julia> GL.flatten(T::GL.Matrix4)
+julia> flatten(T::Matrix4)
 16-element Array{Float32,1}:
  0.23079032
  0.6201795
@@ -97,7 +97,7 @@ Remove the last row and column of a `Matrix4`.
 julia> typeof(T)
 StaticArrays.MArray{Tuple{4,4},Float64,2,16}
 
-julia> GL.dropW(T)
+julia> dropW(T)
 3×3 StaticArrays.MArray{Tuple{3,3},Float64,2,9}:
  0.23079   0.620179  0.362604
  0.650641  0.431527  0.0229223
@@ -118,7 +118,7 @@ end
 Build a translation `Matrix4` from a translaction vector `Point3d`.
 # Example
 ```
-julia> GL.translateMatrix(GL.Point3d(1,2,3))
+julia> translateMatrix(Point3d(1,2,3))
 4×4 MArray{Tuple{4,4},Float64,2,16}:
  1.0  0.0  0.0  1.0
  0.0  1.0  0.0  2.0
@@ -147,7 +147,7 @@ end
 Build a scaling `Matrix4` from a `vs` scaling vector `Point3d`.
 # Example
 ```
-julia> GL.scaleMatrix(GL.Point3d(1.1,1.2,1.3))
+julia> scaleMatrix(Point3d(1.1,1.2,1.3))
 4×4 MArray{Tuple{4,4},Float64,2,16}:
  1.1  0.0  0.0  0.0
  0.0  1.2  0.0  0.0
@@ -180,7 +180,7 @@ In order to set a camera position, all really needed is a point to set the *came
 
 # Example
 ```
-julia> GL.lookAtMatrix(GL.Point3d(2,2,2), GL.Point3d(0,0,0), GL.Point3d(0,0,1))
+julia> lookAtMatrix(Point3d(2,2,2), Point3d(0,0,0), Point3d(0,0,1))
 4×4 MArray{Tuple{4,4},Float64,2,16}:
  -0.707107   0.707107  0.0        0.0
  -0.408248  -0.408248  0.816497   0.0

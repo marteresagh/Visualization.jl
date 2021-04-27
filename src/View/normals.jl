@@ -11,5 +11,5 @@ function normals(points::Points, normals::Points; len=1.::Float64)
 		tnormals[:,i] = points[:,i] + len*normals[:,i]
 	end
 	totalpoints = hcat(points,tnormals)
-	return GL.GLGrid(totalpoints,norm,GL.Point4d(1,1,1,1))
+	return GLGrid(totalpoints,norm,Point4d(1,1,1,1))
 end

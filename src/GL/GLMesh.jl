@@ -6,8 +6,8 @@ Container of (a) the `Int32` code of primitives in `GLMesh`; (b) a matrix transf
 # Example
 Generation of the object `GLMesh` modeling the unit 3D cube with one vertex on the origin:
 ```
-julia> GL.GLCuboid(GL.Box3d(GL.Point3d(0,0,0),GL.Point3d(1,1,1)))
-ViewerGL.GLMesh(4, [1.0 0.0 0.0 0.0; 0.0 1.0 0.0 0.0; 0.0 0.0 1.0 0.0; 0.0 0.0 0.0 1.0], ViewerGL.GLVertexArray(-1), ViewerGL.GLVertexBuffer(-1, Float32[0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0  …  1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0]), ViewerGL.GLVertexBuffer(-1, Float32[0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0  …  0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0]), ViewerGL.GLVertexBuffer(-1, Float32[]))
+julia> GLCuboid(Box3d(Point3d(0,0,0),Point3d(1,1,1)))
+ViewerGLMesh(4, [1.0 0.0 0.0 0.0; 0.0 1.0 0.0 0.0; 0.0 0.0 1.0 0.0; 0.0 0.0 0.0 1.0], ViewerGLVertexArray(-1), ViewerGLVertexBuffer(-1, Float32[0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0  …  1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0]), ViewerGLVertexBuffer(-1, Float32[0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0  …  0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0]), ViewerGLVertexBuffer(-1, Float32[]))
 ```
 """
 mutable struct GLMesh
@@ -60,12 +60,12 @@ Compute in 2D the ccw normal vector to a line segment oriented from `p1` to `p2`
 
 # Example
 ```
-julia> GL.computeNormal(GL.Point2d(1,0), GL.Point2d(0.8,0.5))
+julia> computeNormal(Point2d(1,0), Point2d(0.8,0.5))
 2-element StaticArrays.MArray{Tuple{2},Float64,1,2}:
  0.9284766908852594
  0.37139067635410367
 
-julia> GL.computeNormal(GL.Point2d(-0.8,0.5), GL.Point2d(-1,0))
+julia> computeNormal(Point2d(-0.8,0.5), Point2d(-1,0))
 2-element StaticArrays.MArray{Tuple{2},Float64,1,2}:
  -0.9284766908852594
   0.37139067635410367
@@ -85,7 +85,7 @@ end
 Compute the ccw normal vector to a 3D triangle with orientation `(p0,p1,p2)`.
 # Example
 ```
-julia> GL.computeNormal(GL.Point3d(0,0,0), GL.Point3d(1,0,0),GL.Point3d(0,1,0))
+julia> computeNormal(Point3d(0,0,0), Point3d(1,0,0),Point3d(0,1,0))
 3-element StaticArrays.MArray{Tuple{3},Float64,1,3}:
  0.0
  0.0
@@ -102,13 +102,13 @@ end
 """
 	getBoundingBox(mesh::GLMesh)
 
-Return an object of ViewerGL.Box3d
+Return an object of ViewerBox3d
 # Example
 ```
-julia> mesh = GL.GLCuboid(GL.Box3d(GL.Point3d(0,0,0),GL.Point3d(1,1,1)));
+julia> mesh = GLCuboid(Box3d(Point3d(0,0,0),Point3d(1,1,1)));
 
-julia> GL.getBoundingBox(mesh)
-ViewerGL.Box3d([0.0, 0.0, 0.0], [1.0, 1.0, 1.0])
+julia> getBoundingBox(mesh)
+ViewerBox3d([0.0, 0.0, 0.0], [1.0, 1.0, 1.0])
 ```
 """
 function getBoundingBox(mesh::GLMesh)
@@ -141,13 +141,13 @@ end
 Return the `GLMesh` modeling a 3-cuboid, i.e. the 3D parallelepiped parallel to the axes of reference frame).
 # Example
 ```
-julia> mesh = GL.GLAxis(GL.Point3d(-2,-2,-2),GL.Point3d(+2,+2,+2));
+julia> mesh = GLAxis(Point3d(-2,-2,-2),Point3d(+2,+2,+2));
 
-julia> box = GL.getBoundingBox(mesh)
-ViewerGL.Box3d([-2.0, -2.0, -2.0], [2.0, 2.0, 2.0])
+julia> box = getBoundingBox(mesh)
+ViewerBox3d([-2.0, -2.0, -2.0], [2.0, 2.0, 2.0])
 
-julia> GL.GLCuboid(box)
-ViewerGL.GLMesh(4, [1.0 0.0 0.0 0.0; 0.0 1.0 0.0 0.0; 0.0 0.0 1.0 0.0; 0.0 0.0 0.0 1.0], ViewerGL.GLVertexArray(-1), ViewerGL.GLVertexBuffer(-1, Float32[-2.0, 2.0, -2.0, 2.0, 2.0, -2.0, 2.0, -2.0, -2.0, -2.0  …  2.0, -2.0, 2.0, -2.0, -2.0, -2.0, 2.0, -2.0, 2.0, 2.0]), ViewerGL.GLVertexBuffer(-1, Float32[0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0  …  0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0]), ViewerGL.GLVertexBuffer(-1, Float32[]))
+julia> GLCuboid(box)
+ViewerGLMesh(4, [1.0 0.0 0.0 0.0; 0.0 1.0 0.0 0.0; 0.0 0.0 1.0 0.0; 0.0 0.0 0.0 1.0], ViewerGLVertexArray(-1), ViewerGLVertexBuffer(-1, Float32[-2.0, 2.0, -2.0, 2.0, 2.0, -2.0, 2.0, -2.0, -2.0, -2.0  …  2.0, -2.0, 2.0, -2.0, -2.0, -2.0, 2.0, -2.0, 2.0, 2.0]), ViewerGLVertexBuffer(-1, Float32[0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0  …  0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0]), ViewerGLVertexBuffer(-1, Float32[]))
 ```
 """
 function GLCuboid(box::Box3d)
@@ -188,9 +188,9 @@ The reference frame is colored according to the *`RGB` colors*, respectively.
 # Example
 Note the size and position of reference frame in locol coordinates ...
 ```
-GL.VIEW([
-	GL.GLCuboid(GL.Box3d(GL.Point3d(0,0,0),GL.Point3d(1,1,1)))
-	GL.GLAxis(GL.Point3d(-2,-2,-2),GL.Point3d(+2,+2,+2))
+VIEW([
+	GLCuboid(Box3d(Point3d(0,0,0),Point3d(1,1,1)))
+	GLAxis(Point3d(-2,-2,-2),Point3d(+2,+2,+2))
 	])
 ```
 """

@@ -60,15 +60,15 @@ Release the memory allocated by `vertex_array`, `vertices`, `normals`, and `colo
 # Example
 
 ```
-julia> mesh = GL.GLCuboid(GL.Box3d(GL.Point3d(0,0,0),GL.Point3d(1,1,1)))
-ViewerGL.GLMesh(4, [1.0 0.0 0.0 0.0; 0.0 1.0 0.0 0.0; 0.0 0.0 1.0 0.0; 0.0 0.0 0.0 1.0], ViewerGL.GLVertexArray(-1), ViewerGL.GLVertexBuffer(-1, Float32[0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0  …  1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0]), ViewerGL.GLVertexBuffer(-1, Float32[0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0  …  0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0]), ViewerGL.GLVertexBuffer(-1, Float32[]))
+julia> mesh = GLCuboid(Box3d(Point3d(0,0,0),Point3d(1,1,1)))
+ViewerGLMesh(4, [1.0 0.0 0.0 0.0; 0.0 1.0 0.0 0.0; 0.0 0.0 1.0 0.0; 0.0 0.0 0.0 1.0], ViewerGLVertexArray(-1), ViewerGLVertexBuffer(-1, Float32[0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0  …  1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0]), ViewerGLVertexBuffer(-1, Float32[0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0  …  0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0]), ViewerGLVertexBuffer(-1, Float32[]))
 
-julia> viewer = GL.Viewer([mesh])
-ViewerGL.Viewer(0, 1024, 768, 1.0, 1.0, 60.0, [0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0], 0.0, 0.0, 0.0, 0.0, 0.0, 0, ViewerGL.GLMesh[GLMesh(4, [1.0 0.0 0.0 0.0; 0.0 1.0 0.0 0.0; 0.0 0.0 1.0 0.0; 0.0 0.0 0.0 1.0], GLVertexArray(-1), GLVertexBuffer(-1, Float32[0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0  …  1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0]), GLVertexBuffer(-1, Float32[0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0  …  0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0]), GLVertexBuffer(-1, Float32[]))], Dict{Any,Any}())
+julia> viewer = Viewer([mesh])
+ViewerViewer(0, 1024, 768, 1.0, 1.0, 60.0, [0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0], 0.0, 0.0, 0.0, 0.0, 0.0, 0, ViewerGLMesh[GLMesh(4, [1.0 0.0 0.0 0.0; 0.0 1.0 0.0 0.0; 0.0 0.0 1.0 0.0; 0.0 0.0 0.0 1.0], GLVertexArray(-1), GLVertexBuffer(-1, Float32[0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0  …  1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0]), GLVertexBuffer(-1, Float32[0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0  …  0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0]), GLVertexBuffer(-1, Float32[]))], Dict{Any,Any}())
 
-julia> GL.releaseGpuResources(viewer)
+julia> releaseGpuResources(viewer)
 
-julia> GL.releaseGpuResources
+julia> releaseGpuResources
 releaseGpuResources (generic function with 5 methods)
 ```
 """
@@ -91,7 +91,7 @@ end
 Init ``GLFW``, Create a new UI ``window``, make ``context`` current, print ``shader`` parameters, set interaction ``callbacks``, poll ``events``, and render the ``meshes`` in `viewer::Viever`.
 # Example
 ```
-julia> GL.runViewer(viewer)
+julia> runViewer(viewer)
 # GLFW init returned true
 # GL_SHADING_LANGUAGE_VERSION 1.20
 # GL_VERSION                  2.1 NVIDIA-12.0.23 355.11.10.50.10.103
@@ -161,9 +161,9 @@ Load ``meshes`` in current ``Viewer`` object, create the bounding ``BOX``, accor
 # Example
 Generate the window, display the mesh of the unit cube, and allow for viewing interaction with it:
 ```
-julia> mesh = ViewerGL.GLMesh(4, [2.0 0.0 0.0 -1.0; 0.0 2.0 0.0 -1.0; 0.0 0.0 2.0 -1.0; 0.0 0.0 0.0 1.0], ViewerGL.GLVertexArray(-1), ViewerGL.GLVertexBuffer(-1, Float32[0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0]), ViewerGL.GLVertexBuffer(-1, Float32[0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0]), ViewerGL.GLVertexBuffer(-1, Float32[]))
+julia> mesh = ViewerGLMesh(4, [2.0 0.0 0.0 -1.0; 0.0 2.0 0.0 -1.0; 0.0 0.0 2.0 -1.0; 0.0 0.0 0.0 1.0], ViewerGLVertexArray(-1), ViewerGLVertexBuffer(-1, Float32[0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0]), ViewerGLVertexBuffer(-1, Float32[0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0]), ViewerGLVertexBuffer(-1, Float32[]))
 
-julia> GL.VIEW([mesh]);
+julia> VIEW([mesh]);
 # GLFW init returned true
 # GL_SHADING_LANGUAGE_VERSION 1.20
 # GL_VERSION                  2.1 NVIDIA-12.0.23 355.11.10.50.10.103
@@ -174,14 +174,14 @@ julia> GL.VIEW([mesh]);
 function VIEW(meshes,view=true)
 
 	global viewer
-	viewer=GL.Viewer(meshes)
+	viewer=Viewer(meshes)
 
 	# calculate bounding box -> (-1,+1) ^3
-	BOX=GL.invalidBox()
+	BOX=invalidBox()
 	for mesh in viewer.meshes
-		box=GL.getBoundingBox(mesh)
-		GL.addPoint(BOX,box.p1)
-		GL.addPoint(BOX,box.p2)
+		box=getBoundingBox(mesh)
+		addPoint(BOX,box.p1)
+		addPoint(BOX,box.p2)
 	end
 
 	S=BOX.p2-BOX.p1
@@ -206,8 +206,8 @@ function VIEW(meshes,view=true)
 	viewer.zFar	  = maxsize * 10.0
 	viewer.walk_speed = maxsize / 100.0
 	if view==true
-		GL.redisplay(viewer)
-		GL.runViewer(viewer)
+		redisplay(viewer)
+		runViewer(viewer)
 	end
 	return viewer
 end
@@ -221,9 +221,9 @@ end
 Compute and return the `lookAtMatrix` matrix from current ``eye parameters``.
 
 ```
-julia> GL.VIEW([mesh])
+julia> VIEW([mesh])
 
-julia> GL.getModelview(GL.viewer)
+julia> getModelview(viewer)
 4×4 MArray{Tuple{4,4},Float64,2,16}:
  -0.707107   0.707107  0.0        0.0
  -0.408248  -0.408248  0.816497   0.0
@@ -244,13 +244,13 @@ Compute and return the `perspectiveMatrix` from current ``viewing parameters``, 
 # Example
 Define the ``VIEW`` of a `mesh`, get the generated `viewer`, and export to a ``text file`` "test/viewcube.txt".
 ```
-julia> mesh = ViewerGL.GLMesh(4, [2.0 0.0 0.0 -1.0; 0.0 2.0 0.0 -1.0; 0.0 0.0 2.0 -1.0; 0.0 0.0 0.0 1.0], ViewerGL.GLVertexArray(-1), ViewerGL.GLVertexBuffer(-1, Float32[0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0]), ViewerGL.GLVertexBuffer(-1, Float32[0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0]), ViewerGL.GLVertexBuffer(-1, Float32[]))
+julia> mesh = ViewerGLMesh(4, [2.0 0.0 0.0 -1.0; 0.0 2.0 0.0 -1.0; 0.0 0.0 2.0 -1.0; 0.0 0.0 0.0 1.0], ViewerGLVertexArray(-1), ViewerGLVertexBuffer(-1, Float32[0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0]), ViewerGLVertexBuffer(-1, Float32[0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0]), ViewerGLVertexBuffer(-1, Float32[]))
 
-julia> GL.VIEW([mesh])
+julia> VIEW([mesh])
 
-julia> viewer = GL.viewer
+julia> viewer = viewer
 
-julia> viewerstring = @show GL.viewer;
+julia> viewerstring = @show viewer;
 
 julia> open("test/viewcube.txt", "w") do f
 	  	  print(f, viewerstring);
@@ -260,9 +260,9 @@ julia> string = readline("test/viewcube.txt");
 ```
 # Example
 ```
-julia> GL.VIEW([mesh])
+julia> VIEW([mesh])
 
-julia> GL.getProjection(GL.viewer)  # `GL.viewer` global variable set by `GL.VIEW`
+julia> getProjection(viewer)  # `viewer` global variable set by `VIEW`
 4×4 MArray{Tuple{4,4},Float64,2,16}:
  1.29904  0.0       0.0       0.0
  0.0      1.73205   0.0       0.0
@@ -291,15 +291,15 @@ end
 # Example
 
 ```
-julia> GL.VIEW([mesh])
+julia> VIEW([mesh])
 
-julia> pos = GL.viewer.pos
+julia> pos = viewer.pos
 3-element MArray{Tuple{3},Float64,1,3}:
  3.0
  3.0
  3.0
 
-projectPoint(GL.viewer,GL.Point3d(pos))
+projectPoint(viewer,Point3d(pos))
 ```
 """
 function projectPoint(viewer::Viewer,pos::Point3d)
@@ -648,7 +648,7 @@ end
 
 
 # example: see GLMesh.jl for an example about how to generate a mesh
-# GL.VIEW([
-# 	GL.GLCuboid(GL.Box3d(GL.Point3d(0,0,0),GL.Point3d(1,1,1)))
-# 	GL.GLAxis(GL.Point3d(-2,-2,-2),GL.Point3d(+2,+2,+2))
+# VIEW([
+# 	GLCuboid(Box3d(Point3d(0,0,0),Point3d(1,1,1)))
+# 	GLAxis(Point3d(-2,-2,-2),Point3d(+2,+2,+2))
 # 	])

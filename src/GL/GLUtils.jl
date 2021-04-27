@@ -30,7 +30,7 @@ julia> V,FV = Lar.simplexGrid([2,2])
 ([0.0 1.0 … 1.0 2.0; 0.0 0.0 … 2.0 2.0],
 Array{Int64,1}[[1, 2, 4], [2, 4, 5], [2, 3, 5], [3, 5, 6], [4, 5, 7], [5, 7, 8], [5, 6, 8], [6, 8, 9]])
 
-julia> vertices,normals = GL.lar4mesh(GL.two2three(V'),FV);
+julia> vertices,normals = lar4mesh(two2three(V'),FV);
 (Float32[0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0  …  0.0, 4.0, 4.0, 0.0, 3.0, 4.0, 0.0, 4.0, 3.0, 0.0],
 Float32[0.0, 0.0, -0.5, 0.0, 0.0, -0.5, 0.0, 0.0, -0.5, 0.0  …  -0.5, 0.0, 0.0, 0.5, 0.0, 0.0, 0.5, 0.0, 0.0, 0.5])
 ```
@@ -46,10 +46,10 @@ function lar4mesh(verts::Points,cells::Cells) # cells are triangles
 	normals =Vector{Float32}()
 	for cell in cells
 		p3,p2,p1 = verts[cell[1],:],verts[cell[2],:],verts[cell[3],:]
-		p1 = convert(GL.Point3d, p1)
-		p2 = convert(GL.Point3d, p2)
-		p3 = convert(GL.Point3d, p3)
-		n=0.5*GL.computeNormal(p1::GL.Point3d,p2::GL.Point3d,p3::GL.Point3d)
+		p1 = convert(Point3d, p1)
+		p2 = convert(Point3d, p2)
+		p3 = convert(Point3d, p3)
+		n=0.5*computeNormal(p1::Point3d,p2::Point3d,p3::Point3d)
 		append!(vertices,p1); append!(normals,n)
 		append!(vertices,p2); append!(normals,n)
 		append!(vertices,p3); append!(normals,n)
@@ -70,7 +70,7 @@ julia> V
  0.0  1.0  2.0  0.0  1.0  2.0  0.0  1.0  2.0
  0.0  0.0  0.0  1.0  1.0  1.0  2.0  2.0  2.0
 
- julia> GL.two2three(V')
+ julia> two2three(V')
  9×3 Array{Float64,2}:
   0.0  0.0  0.0
   1.0  0.0  0.0
@@ -124,7 +124,7 @@ Define the width of the line primitive
 """
 function glLineWidth()
 	width = convert(UInt32, 2)
-	ModernGL.glLineWidth(width)
+	ModernglLineWidth(width)
 end
 
 
@@ -135,7 +135,7 @@ Define the size of the point primitive
 """
 function glPointSize()
 	size = convert(UInt32, 8) # multiples of 2 give sprites!!
-	ModernGL.glPointSize(size)
+	ModernglPointSize(size)
 end
 
 

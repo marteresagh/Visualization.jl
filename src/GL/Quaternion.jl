@@ -75,15 +75,15 @@ By combining the quaternion representations of the Euler rotations we get for th
  	 0.0    0.0   1.0  0.0;
  	 0.0    0.0   0.0  1.0];
 
- julia> T = GL.Matrix4( Rz(c) * Ry(b) * Rx(a) );
+ julia> T = Matrix4( Rz(c) * Ry(b) * Rx(a) );
  4×4 MArray{Tuple{4,4},Float64,2,16}:
    0.75      -0.216506   0.625     0.0
    0.433013   0.875     -0.216506  0.0
   -0.5        0.433013   0.75      0.0
    0.0        0.0        0.0       1.0
 
- julia> q = GL.convertToQuaternion(T::GL.Matrix4)
- ViewerGL.Quaternion(0.9185586535436918, 0.1767766952966369, 0.30618621784789724, 0.1767766952966369)
+ julia> q = convertToQuaternion(T::Matrix4)
+ ViewerQuaternion(0.9185586535436918, 0.1767766952966369, 0.30618621784789724, 0.1767766952966369)
 ```
 """
 function convertToQuaternion(T::Matrix4)
@@ -119,17 +119,17 @@ Quaternion to affine matrix `T::Matrix4` transformation.
 julia> a,b,c = pi/6,pi/3,pi/24
 (0.5235987755982988, 1.0471975511965976, 0.1308996938995747)
 
-julia> T = GL.Matrix4( Rz(c) * Ry(b) * Rx(a) )
+julia> T = Matrix4( Rz(c) * Ry(b) * Rx(a) )
 4×4 MArray{Tuple{4,4},Float64,2,16}:
   0.75      -0.216506   0.625     0.0
   0.433013   0.875     -0.216506  0.0
  -0.5        0.433013   0.75      0.0
   0.0        0.0        0.0       1.0
 
-julia> q = GL.convertToQuaternion(T::GL.Matrix4)
-ViewerGL.Quaternion(0.9185586535436918, 0.1767766952966369, 0.30618621784789724, 0.1767766952966369)
+julia> q = convertToQuaternion(T::Matrix4)
+ViewerQuaternion(0.9185586535436918, 0.1767766952966369, 0.30618621784789724, 0.1767766952966369)
 
-julia> GL.convertToMatrix(q::GL.Quaternion)
+julia> convertToMatrix(q::Quaternion)
 4×4 MArray{Tuple{4,4},Float64,2,16}:
   0.75      -0.216506   0.625     0.0
   0.433013   0.875     -0.216506  0.0

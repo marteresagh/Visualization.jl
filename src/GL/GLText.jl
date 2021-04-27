@@ -12,17 +12,17 @@ hpcs = Tuple{Array{Float64,N} where N,Array{Array{Int64,1},1}}[([0.0, 0.0], [[1]
 """
 ascii_LAR = DataStructures.OrderedDict{Int,LAR}()
 
-	GL.ascii2lar::{Int,LAR}
+	ascii2lar::{Int,LAR}
 
 *Ordered dictionary* of printable ASCII codes as one-dimensional *LAR models* in 2D.
 
 `Key` is the `integer` ASCII code between 32 and 126.
 # Example
 ```
-julia> GL.ascii2lar[46]
+julia> ascii2lar[46]
 ([2.0 2.0 … 1.5 2.0; 0.0 0.5 … 0.0 0.0], Array{Int64,1}[[1, 2], [2, 3], [3, 4], [4, 5]])
 
-julia> GL.ascii2lar[126]
+julia> ascii2lar[126]
 ([1.0 1.75 2.75 3.5; 5.0 5.5 5.0 5.5], Array{Int64,1}[[1, 2], [2, 3], [3, 4]])
 ```
 """
@@ -59,7 +59,7 @@ end
 
 # Example
 ```
-julia> GL.charseq("PLaSM")
+julia> charseq("PLaSM")
 5-element Array{Char,1}:
  'P'
  'L'
@@ -80,7 +80,7 @@ Compute the one-dim *LAR model* drawing the contents of `mystring`
 
 # Example
 ```
-julia> model = GL.text("PLaSM")
+julia> model = text("PLaSM")
 # output
 ([0.0 0.0 3.0 4.0 4.0 3.0 0.0 9.0 5.0 5.0 14.0 13.0 11.0 10.0
 10.0 11.0 13.0 14.0 14.0 14.0 15.0 16.0 18.0 19.0 19.0 18.0 16.0 15.0 15.0 16.0 18.0
@@ -91,35 +91,35 @@ Array{Int64,1}[[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[8,9],[9,10],[11,12],[12,13],
 [14,15],[15,16],[16,17],[17,18],[18,11],[19,20],[21,22],[22,23],[23,24],[24,25],[25,26],
 [26,27],[27,28],[28,29],[29,30],[30,31],[31,32],[33,34],[34,35],[35,36],[36,37]])
 
-julia> GL.VIEW([GL.GLLar2gl(model...)])
+julia> VIEW([GLLar2gl(model...)])
 ```
 """
 function text(mystring,flag=true)
-	V,EV = GL.comp([ Lar.struct2lar, Lar.Struct, Cat, distr,
-			GL.cons([ charpols, k(Lar.t(fontspacing+fontwidth,0)) ]),charseq ])(mystring)
-	out = GL.normalize3(V,flag),EV
+	V,EV = comp([ Lar.struct2lar, Lar.Struct, Cat, distr,
+			cons([ charpols, k(Lar.t(fontspacing+fontwidth,0)) ]),charseq ])(mystring)
+	out = normalize3(V,flag),EV
 	return out
 end
 
 
 """
-	GLText(string)::GL.GLMesh
+	GLText(string)::GLMesh
 
 Transform a string into a mesh of lines.
 To display as graphical text.
 # Example
 ```
-julia> GL.text("Plasm")
+julia> text("Plasm")
 ([0.0 0.0 … 0.833333 0.833333; 0.0 0.25 … 0.0 0.125; 0.0 0.0 … 0.0 0.0], Array{Int64,1}[[1, 2], [2, 3], [3, 4], [4, 5], [5, 6]
 , [6, 7], [8, 9], [9, 10], [11, 12], [13, 14]  …  [25, 26], [26, 27], [27, 28], [28, 29], [29, 30], [31, 32], [32, 33], [34, 3
 5], [35, 36], [37, 38]])
 
-julia> GL.GLText("Plasm")
-ViewerGL.GLMesh(1, [1.0 0.0 0.0 0.0; 0.0 1.0 0.0 0.0; 0.0 0.0 1.0 0.0; 0.0 0.0 0.0 1.0], ViewerGL.GLVertexArray(-1), ViewerGL.GLVertexBuffer(-1, Float32[0.0, 0.25, 0.0, 0.0, 0.0, 0.0, 0.125, 0.25, 0.0, 0.0  …  0.0, 0.916667, 0.125, 0.0, 0.833333, 0.125, 0.0, 0.833333, 0.0, 0.0]), ViewerGL.GLVertexBuffer(-1, Float32[]), ViewerGL.GLVertexBuffer(-1, Float32[]))
+julia> GLText("Plasm")
+ViewerGLMesh(1, [1.0 0.0 0.0 0.0; 0.0 1.0 0.0 0.0; 0.0 0.0 1.0 0.0; 0.0 0.0 0.0 1.0], ViewerGLVertexArray(-1), ViewerGLVertexBuffer(-1, Float32[0.0, 0.25, 0.0, 0.0, 0.0, 0.0, 0.125, 0.25, 0.0, 0.0  …  0.0, 0.916667, 0.125, 0.0, 0.833333, 0.125, 0.0, 0.833333, 0.0, 0.0]), ViewerGLVertexBuffer(-1, Float32[]), ViewerGLVertexBuffer(-1, Float32[]))
 ```
 """
-function GLText(string,color=COLORS[12])::GL.GLMesh
-	GL.GLLines(GL.text(string)...,color)
+function GLText(string,color=COLORS[12])::GLMesh
+	GLLines(text(string)...,color)
 end
 
 
@@ -149,7 +149,7 @@ function translate(c)
 	function translate0(lar)
 		xs = lar[1][1,:]
 		width = maximum(xs) - minimum(xs)
-		GL.apply(Lar.t(width/c,0))(lar)
+		apply(Lar.t(width/c,0))(lar)
 	end
 	return translate0
 end
@@ -195,14 +195,14 @@ Partial implementation of the GKS's graphics primitive `text`.
 # Example
 
 ```
-GL.VIEW([
-	GL.GLLines(GL.textWithAttributes("centre", pi/4)("PLaSM")...),
-	GL.GLAxis(GL.Point3d(0,0,0),GL.Point3d(1,1,1))
+VIEW([
+	GLLines(textWithAttributes("centre", pi/4)("PLaSM")...),
+	GLAxis(Point3d(0,0,0),Point3d(1,1,1))
 	])
 ```
-GL.VIEW([
-	GL.GLLines(GL.textWithAttributes("left", pi/4)("PLaSM")...),
-	GL.GLAxis(GL.Point3d(0,0,0),GL.Point3d(1,1,1))
+VIEW([
+	GLLines(textWithAttributes("left", pi/4)("PLaSM")...),
+	GLAxis(Point3d(0,0,0),Point3d(1,1,1))
 ])
 """
 function textWithAttributes(textalignment="centre", textangle=0,
@@ -211,7 +211,7 @@ function textWithAttributes(textalignment="centre", textangle=0,
 		id = x->x
 		mat = Lar.s(textwidth/fontwidth,textheight/fontheight)
 		comp([
-		   GL.apply(Lar.r(textangle)),
+		   apply(Lar.r(textangle)),
 		   align(textalignment),
 		   Lar.struct2lar,
 		   Lar.Struct,
@@ -236,7 +236,7 @@ The embedding is done by adding ``d`` zero coordinates to each vertex.
 julia> square = Lar.cuboid([1,1])
 ([0.0 0.0 1.0 1.0; 0.0 1.0 0.0 1.0], Array{Int64,1}[[1, 2, 3, 4]])
 
-julia> GL.embed(1)(square)
+julia> embed(1)(square)
 ([0.0 0.0 1.0 1.0; 0.0 1.0 0.0 1.0; 0.0 0.0 0.0 0.0], Array{Int64,1}[[1, 2, 3, 4]])
 ```
 """
@@ -258,11 +258,11 @@ Different `colors` and size are used for the various dimensional cells.
 
 ```
 model = Lar.cuboidGrid([3,4,2], true);
-GL.VIEW(GL.numbering()(model));
+VIEW(numbering()(model));
 
 model = Lar.cuboidGrid([10,10], true);
-meshes = GL.numbering(1.5)(model);
-GL.VIEW(meshes)
+meshes = numbering(1.5)(model);
+VIEW(meshes)
 ```
 """
 function numbering(sizeScaling=1.)
@@ -270,29 +270,29 @@ function numbering(sizeScaling=1.)
 		V,cells = model
 		meshes = []
 		if length(cells)>2
-			#background = GL.GLHulls(V, cells[3], color, alpha)
+			#background = GLHulls(V, cells[3], color, alpha)
 		end
 		if size(V,1)==2
-			V = GL.embed(1)(model)[1]
+			V = embed(1)(model)[1]
 		end
 		wireframe = V,cells[2]
 		ns = sizeScaling
-		gcode = GL.textWithAttributes("centre", 0, 0.1ns, 0.2ns, 0.025ns)
-		push!(meshes,GL.GLLines(wireframe[1],wireframe[2],color))
+		gcode = textWithAttributes("centre", 0, 0.1ns, 0.2ns, 0.025ns)
+		push!(meshes,GLLines(wireframe[1],wireframe[2],color))
 
-		colors = GL.COLORS[3], GL.COLORS[7], GL.COLORS[5], GL.COLORS[8]
+		colors = COLORS[3], COLORS[7], COLORS[5], COLORS[8]
 
 		for (h,skel) in zip(1:length(cells),cells)
 	 	  nums = []
 		  for (k,cell) in zip(1:length(skel),skel)
 				center = sum([V[:,v] for v in cell])/length(cell)
-				code = GL.embed(1)( gcode(string(k)) )
+				code = embed(1)( gcode(string(k)) )
 				scaling = (0.6+0.1h,0.6+0.1h,1)
 				push!(nums, Lar.struct2lar( Lar.Struct([
 					Lar.t(center...), Lar.s(scaling...), code ]) ))
 		  end
 		  for num in nums
-				mesh = GL.GLLines(num[1],num[2],colors[h])
+				mesh = GLLines(num[1],num[2],colors[h])
 				push!( meshes, mesh )
 		  end
 		end
@@ -356,8 +356,8 @@ end
 #FV = [collect(Set(Cat(EV[e] for e in SparseArrays.findnz(copFE[i,:])[1]))) for i=1:size(copFE,1)]
 #VV = [[v] for v=1:size(V,1)]
 #model = (convert(Lar.Points, V'), Lar.Cells[VV,EV,FV])
-#meshes = GL.numbering(.02)(model, GL.COLORS[1], 0.1);
-#GL.VIEW(meshes);
+#meshes = numbering(.02)(model, COLORS[1], 0.1);
+#VIEW(meshes);
 #```
 #"""
 function numbering1(scaling=0.1)
@@ -368,7 +368,7 @@ function numbering0(model::Tuple{Lar.Points,Lar.ChainOp,Lar.ChainOp})
 	FV = [collect(Set(Cat(EV[e] for e in SparseArrays.findnz(copFE[i,:])[1]))) for i=1:size(copFE,1)]
 	#FV = convert(Array{Array{Int64,1},1}, FV)
 	model = (convert(Lar.Points, V'), Lar.Cells[VV,EV,FV])
-	return GL.numbering(scaling)(model)
+	return numbering(scaling)(model)
 end
 return numbering0
 end
@@ -402,10 +402,10 @@ when applied to another parameter.
 #	Examples
 
 ```
-julia> GL.k(10)(100)
+julia> k(10)(100)
 10
 
-julia> GL.k(sin)(cos)
+julia> k(sin)(cos)
 sin
 ```
 """

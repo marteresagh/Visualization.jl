@@ -14,7 +14,7 @@ Point4d() = Point4d(0.0,0.0,0.0,0.0)
 Return the norm of a `Point2d` object
 # Example
 ```
-julia> GL.norm(GL.Point2d(1,1))
+julia> norm(Point2d(1,1))
 1.4142135623730951
 ```
 """
@@ -30,7 +30,7 @@ end
 Return the norm of a `Point3d` object
 # Example
 ```
-julia> GL.norm(GL.Point3d(1,1,1))
+julia> norm(Point3d(1,1,1))
 1.7320508075688772
 ```
 """
@@ -46,7 +46,7 @@ norm(p::Point4d)
 Return the norm of a `Point4d` object
 # Example
 ```
-julia> GL.norm(GL.Point4d(1,1,1,1))
+julia> norm(Point4d(1,1,1,1))
 2.0
 ```
 """
@@ -62,7 +62,7 @@ end
 Return the unit vector parallel to `p::Point2d`.
 # Example
 ```
-julia> GL.normalized(GL.Point2d(1,1))
+julia> normalized(Point2d(1,1))
 2-element MArray{Tuple{2},Float64,1,2}:
  0.7071067811865475
  0.7071067811865475
@@ -81,13 +81,13 @@ normalized(p::Point3d)
 Return the unit vector parallel to `p::Point3d`.
 # Example
 ```
-julia> GL.normalized(GL.Point3d(1,1,1))
+julia> normalized(Point3d(1,1,1))
 3-element MArray{Tuple{3},Float64,1,3}:
  0.5773502691896258
  0.5773502691896258
  0.5773502691896258
 
-julia> GL.norm(GL.normalized(GL.Point3d(1,1,1)))
+julia> norm(normalized(Point3d(1,1,1)))
 1.0
 ```
 """
@@ -104,14 +104,14 @@ normalized(p::Point4d)
 Return the unit vector parallel to `p::Point4d`.
 # Example
 ```
-julia> GL.normalized(GL.Point4d(1,1,1,1))
+julia> normalized(Point4d(1,1,1,1))
 4-element MArray{Tuple{4},Float64,1,4}:
  0.5
  0.5
  0.5
  0.5
 
-julia> GL.norm(GL.normalized(GL.Point4d(1,1,1)))
+julia> norm(normalized(Point4d(1,1,1)))
 1.0
 ```
 """
@@ -128,7 +128,7 @@ end
 Divide `p` for the fourth coordinate, and return the first three ones.
 # Example
 ```
-julia> GL.dropW(GL.Point4d(2,2,2,2))
+julia> dropW(Point4d(2,2,2,2))
 3-element MArray{Tuple{3},Float64,1,3}:
  1.0
  1.0

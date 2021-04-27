@@ -95,8 +95,8 @@ Similarly, a program object will contain an executable that will run on the frag
 
 # Example
 ```
-shader = GL.GLPhongShader(true,true)
-GL.enableProgram(shader)
+shader = GLPhongShader(true,true)
+enableProgram(shader)
 ```
 
 """
