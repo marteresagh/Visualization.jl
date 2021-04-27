@@ -48,6 +48,4 @@ module Visualization
 	include("View/objects.jl")
 	include("View/normals.jl")
 
-
- 	export GL
 end # module
