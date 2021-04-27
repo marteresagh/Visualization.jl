@@ -1,5 +1,4 @@
 using Visualization
-using Common
 
 npoints = 100
 pc = rand(2,npoints)

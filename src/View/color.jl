@@ -1,11 +1,11 @@
 """
-	mesh_color_from_rgb(V::Lar.Points,CV::Lar.Cells,rgb::Lar.Points,alpha=1.0)::GL.GLMesh
+	mesh_color_from_rgb(V::Points,CV::Cells,rgb::Points,alpha=1.0)::GL.GLMesh
 
 Draw colored points, edges, triangles or tetrahedrons.
 """
-function mesh_color_from_rgb(V::Lar.Points,CV::Lar.Cells,rgb::Lar.Points;alpha=1.0)::GL.GLMesh
+function mesh_color_from_rgb(V::Points,CV::Cells,rgb::Points;alpha=1.0)::GL.GLMesh
 
-	function viewtetra(V::Lar.Points, CV::Lar.Cells,rgb::Lar.Points,alpha)::GL.GLMesh
+	function viewtetra(V::Points, CV::Cells,rgb::Points,alpha)::GL.GLMesh
 		triangles = Array{Int64,1}[]
 		#data preparation
 		for cell in CV
@@ -14,7 +14,7 @@ function mesh_color_from_rgb(V::Lar.Points,CV::Lar.Cells,rgb::Lar.Points;alpha=1
 		end
 		# mesh building
 		unique!(sort!.(triangles))
-		mesh = color_from_rgb(V,triangles,rgb,alpha);
+		mesh = mesh_color_from_rgb(V,triangles,rgb,alpha);
 	end
 
 	n = size(V,1)  # space dimension
@@ -43,7 +43,7 @@ function mesh_color_from_rgb(V::Lar.Points,CV::Lar.Cells,rgb::Lar.Points;alpha=1
 			p1 = convert(GL.Point3d, points[:,p1]);
 			p2 = convert(GL.Point3d, points[:,p2]);
 			t = p2-p1;
-			n = Lar.LinearAlgebra.normalize([-t[2];+t[1];t[3]])
+			n = Geometry.normalize([-t[2];+t[1];t[3]])
 			#n  = convert(GL.Point3d, n)
 			append!(vertices,p1); append!(vertices,p2);
 			append!(normals,n);   append!(normals,n);
@@ -74,26 +74,22 @@ function mesh_color_from_rgb(V::Lar.Points,CV::Lar.Cells,rgb::Lar.Points;alpha=1
 end
 
 """
-	points(V::Lar.Points,rgb::Lar.Points,alpha=1.0)::GL.GLMesh
+	points(V::Points,rgb::Points,alpha=1.0)::GL.GLMesh
 
 Draw colored point clouds.
 """
-function points(V::Lar.Points,rgb::Lar.Points;alpha=1.0)::GL.GLMesh
+function points(V::Points,rgb::Points;alpha=1.0)::GL.GLMesh
 	VV = [[i] for i in 1:size(V,2)]
-	return Visualization.mesh_color_from_rgb(V,VV,rgb;alpha=alpha)
-end
-
-function points(PC::PointCloud;alpha=1.0)::GL.GLMesh
-	return points(PC.coordinates,PC.rgbs;alpha=alpha)
+	return mesh_color_from_rgb(V,VV,rgb;alpha=alpha)
 end
 
 
 """
-	points(points::Lar.Points,color=GL.COLORS[12]::GL.Points4d,alpha=1.0::Float64)::GL.GLMesh
+	points(points::Points,color=GL.COLORS[12]::GL.Points4d,alpha=1.0::Float64)::GL.GLMesh
 
 Draw points.
 """
-function points(points::Lar.Points;color=GL.COLORS[12]::GL.Point4d,alpha=1.0::Float64)::GL.GLMesh
+function points(points::Points;color=GL.COLORS[12]::GL.Point4d,alpha=1.0::Float64)::GL.GLMesh
 
 	if size(points,1) == 2
 		points = vcat(points,zeros(size(points,2))')
@@ -115,7 +111,7 @@ function points(points::Lar.Points;color=GL.COLORS[12]::GL.Point4d,alpha=1.0::Fl
 	return ret
 end
 
-function points(point::Array{Float64,1};color=GL.COLORS[12]::GL.Point4d,alpha=1.0::Float64)::GL.GLMesh
+function points(point::Point;color=GL.COLORS[12]::GL.Point4d,alpha=1.0::Float64)::GL.GLMesh
 	pt = hcat(point)
 	return points(pt;color=color,alpha=alpha)
 end
