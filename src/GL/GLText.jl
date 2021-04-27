@@ -95,8 +95,8 @@ julia> VIEW([GLLar2gl(model...)])
 ```
 """
 function text(mystring,flag=true)
-	V,EV = comp([ Lar.struct2lar, Lar.Struct, Cat, distr,
-			cons([ charpols, k(Lar.t(fontspacing+fontwidth,0)) ]),charseq ])(mystring)
+	V,EV = comp([ struct2lar, Struct, Cat, distr,
+			cons([ charpols, k(t(fontspacing+fontwidth,0)) ]),charseq ])(mystring)
 	out = normalize3(V,flag),EV
 	return out
 end
@@ -132,7 +132,7 @@ function a2a(mat)
 	function a2a0(models)
 		assembly = []
 		for model in models
-			push!( assembly, Lar.Struct([ mat,model ]) )
+			push!( assembly, Struct([ mat,model ]) )
 		end
 		assembly
 	end
@@ -149,7 +149,7 @@ function translate(c)
 	function translate0(lar)
 		xs = lar[1][1,:]
 		width = maximum(xs) - minimum(xs)
-		apply(Lar.t(width/c,0))(lar)
+		apply(t(width/c,0))(lar)
 	end
 	return translate0
 end
@@ -209,16 +209,16 @@ function textWithAttributes(textalignment="centre", textangle=0,
 							textwidth=1.0, textheight=2.0, textspacing=0.25)
 	function textWithAttributes(strand)
 		id = x->x
-		mat = Lar.s(textwidth/fontwidth,textheight/fontheight)
+		mat = s(textwidth/fontwidth,textheight/fontheight)
 		comp([
-		   apply(Lar.r(textangle)),
+		   apply(r(textangle)),
 		   align(textalignment),
-		   Lar.struct2lar,
-		   Lar.Struct,
+		   struct2lar,
+		   Struct,
 		   Cat,
 		   distr,
 		   cons([ a2a(mat) ∘ charpols,
-				k(Lar.t(textwidth+textspacing,0)) ]),
+				k(t(textwidth+textspacing,0)) ]),
 		   charseq ])(strand)
 	end
 end
@@ -233,7 +233,7 @@ The embedding is done by adding ``d`` zero coordinates to each vertex.
 # Example
 
 ```
-julia> square = Lar.cuboid([1,1])
+julia> square = cuboid([1,1])
 ([0.0 0.0 1.0 1.0; 0.0 1.0 0.0 1.0], Array{Int64,1}[[1, 2, 3, 4]])
 
 julia> embed(1)(square)
@@ -257,10 +257,10 @@ Different `colors` and size are used for the various dimensional cells.
 # Examples
 
 ```
-model = Lar.cuboidGrid([3,4,2], true);
+model = cuboidGrid([3,4,2], true);
 VIEW(numbering()(model));
 
-model = Lar.cuboidGrid([10,10], true);
+model = cuboidGrid([10,10], true);
 meshes = numbering(1.5)(model);
 VIEW(meshes)
 ```
@@ -288,8 +288,8 @@ function numbering(sizeScaling=1.)
 				center = sum([V[:,v] for v in cell])/length(cell)
 				code = embed(1)( gcode(string(k)) )
 				scaling = (0.6+0.1h,0.6+0.1h,1)
-				push!(nums, Lar.struct2lar( Lar.Struct([
-					Lar.t(center...), Lar.s(scaling...), code ]) ))
+				push!(nums, struct2lar( Struct([
+					t(center...), s(scaling...), code ]) ))
 		  end
 		  for num in nums
 				mesh = GLLines(num[1],num[2],colors[h])
@@ -333,7 +333,7 @@ end
 
 #"""
 ##	numbering(scaling=0.1)
-##		(V::Lar.Points, copEV::Lar.ChainOp, copFE::Lar.ChainOp)::Lar.Hpc
+##		(V::Points, copEV::ChainOp, copFE::ChainOp)::Hpc
 #
 #Produce the numbered `Hpc` of `planar_arrangement()` 2D output.
 #Vertices in `V` are stored by row.
@@ -346,28 +346,28 @@ end
 #Lar = LinearAlgebraicRepresentation
 #using ViewerGL; GL = ViewerGL
 #
-#V,EV = Lar.randomcuboids(10, 1.0);
-#V = Lar.normalize(V,flag=true);
-#W = convert(Lar.Points, V');
-#cop_EV = Lar.coboundary_0(EV::Lar.Cells);
-#cop_EW = convert(Lar.ChainOp, cop_EV);
-#V, copEV, copFE = Lar.planar_arrangement(W, cop_EW);
-#EV = Lar.cop2lar(copEV)
+#V,EV = randomcuboids(10, 1.0);
+#V = normalize(V,flag=true);
+#W = convert(Points, V');
+#cop_EV = coboundary_0(EV::Cells);
+#cop_EW = convert(ChainOp, cop_EV);
+#V, copEV, copFE = planar_arrangement(W, cop_EW);
+#EV = cop2lar(copEV)
 #FV = [collect(Set(Cat(EV[e] for e in SparseArrays.findnz(copFE[i,:])[1]))) for i=1:size(copFE,1)]
 #VV = [[v] for v=1:size(V,1)]
-#model = (convert(Lar.Points, V'), Lar.Cells[VV,EV,FV])
+#model = (convert(Points, V'), Cells[VV,EV,FV])
 #meshes = numbering(.02)(model, COLORS[1], 0.1);
 #VIEW(meshes);
 #```
 #"""
 function numbering1(scaling=0.1)
-function numbering0(model::Tuple{Lar.Points,Lar.ChainOp,Lar.ChainOp})
+function numbering0(model::Tuple{Points,ChainOp,ChainOp})
 	(V, copEV, copFE) = model
 	VV = [[k] for k=1:size(V,1)]
 	EV = [SparseArrays.findnz(copEV[h,:])[1] for h=1:size(copEV,1)]
 	FV = [collect(Set(Cat(EV[e] for e in SparseArrays.findnz(copFE[i,:])[1]))) for i=1:size(copFE,1)]
 	#FV = convert(Array{Array{Int64,1},1}, FV)
-	model = (convert(Lar.Points, V'), Lar.Cells[VV,EV,FV])
+	model = (convert(Points, V'), Cells[VV,EV,FV])
 	return numbering(scaling)(model)
 end
 return numbering0
@@ -426,18 +426,18 @@ Apply the `affineMatrix` parameter to the vertices of `larmodel`.
 julia> square = LinearAlgebraicRepresentation.cuboid([1,1])
 ([0.0 0.0 1.0 1.0; 0.0 1.0 0.0 1.0], Array{Int64,1}[[1, 2, 3, 4]])
 
-julia> Lar.apply(LinearAlgebraicRepresentation.t(1,2))(square)
+julia> apply(LinearAlgebraicRepresentation.t(1,2))(square)
 ([1.0 1.0 2.0 2.0; 2.0 3.0 2.0 3.0], Array{Int64,1}[[1, 2, 3, 4]])
 ```
 """
 function apply(affineMatrix::Array{Float64,2})
 	function apply0(larmodel)
-		return Lar.apply( affineMatrix, larmodel )
+		return apply( affineMatrix, larmodel )
 	end
 	return apply0
 end
 function apply(affineMatrix::Array{Float64,2},larmodel)
-	return Lar.apply( affineMatrix, larmodel )
+	return apply( affineMatrix, larmodel )
 end
 
 
