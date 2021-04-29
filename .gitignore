@@ -8,5 +8,3 @@ deps/deps.jl
 *.DS_Store
 
 *WiP*
-
-Manifest.toml
