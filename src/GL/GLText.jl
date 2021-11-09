@@ -96,7 +96,7 @@ julia> VIEW([GLLar2gl(model...)])
 """
 function text(mystring,flag=true)
 	V,EV = comp([ struct2lar, Struct, Cat, distr,
-			cons([ charpols, k(t(fontspacing+fontwidth,0)) ]),charseq ])(mystring)
+			cons([ charpols, k(Lar_t(fontspacing+fontwidth,0)) ]),charseq ])(mystring)
 	out = normalize3(V,flag),EV
 	return out
 end
@@ -149,7 +149,7 @@ function translate(c)
 	function translate0(lar)
 		xs = lar[1][1,:]
 		width = maximum(xs) - minimum(xs)
-		apply(t(width/c,0))(lar)
+		apply(Lar_t(width/c,0))(lar)
 	end
 	return translate0
 end
@@ -208,17 +208,18 @@ VIEW([
 function textWithAttributes(textalignment="centre", textangle=0,
 							textwidth=1.0, textheight=2.0, textspacing=0.25)
 	function textWithAttributes(strand)
+
 		id = x->x
-		mat = s(textwidth/fontwidth,textheight/fontheight)
+		mat = Lar_s(textwidth/fontwidth,textheight/fontheight)
 		comp([
-		   apply(r(textangle)),
+		   apply(Lar_r(textangle)),
 		   align(textalignment),
 		   struct2lar,
 		   Struct,
 		   Cat,
 		   distr,
 		   cons([ a2a(mat) ∘ charpols,
-				k(t(textwidth+textspacing,0)) ]),
+				k(Lar_t(textwidth+textspacing,0)) ]),
 		   charseq ])(strand)
 	end
 end
@@ -289,7 +290,7 @@ function numbering(sizeScaling=1.)
 				code = embed(1)( gcode(string(k)) )
 				scaling = (0.6+0.1h,0.6+0.1h,1)
 				push!(nums, struct2lar( Struct([
-					t(center...), s(scaling...), code ]) ))
+					Lar_t(center...), Lar_s(scaling...), code ]) ))
 		  end
 		  for num in nums
 				mesh = GLLines(num[1],num[2],colors[h])
@@ -435,9 +436,6 @@ function apply(affineMatrix::Array{Float64,2})
 		return apply( affineMatrix, larmodel )
 	end
 	return apply0
-end
-function apply(affineMatrix::Array{Float64,2},larmodel)
-	return apply( affineMatrix, larmodel )
 end
 
 

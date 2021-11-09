@@ -21,6 +21,80 @@ function apply_matrix(affineMatrix::Matrix, V::Point)
 	return apply_matrix(affineMatrix, T)
 end
 
+"""
+	t(args::Array{Number,1}...)::Matrix
+
+Return an *affine transformation Matrix* in homogeneous coordinates. Such `translation` Matrix has ``d+1`` rows and ``d+1`` columns, where ``d`` is the number of translation parameters in the `args` array.
+"""
+function Lar_t(args...)::Matrix
+	d = length(args)
+	mat = Matrix{Float64}(LinearAlgebra.I, d+1, d+1)
+	for k in range(1, length=d)
+        	mat[k,d+1]=args[k]
+	end
+	return mat
+end
+
+"""
+	s(args::Array{Number,1}...)::Matrix
+
+
+Return an *affine transformation Matrix* in homogeneous coordinates. Such `scaling` Matrix has ``d+1`` rows and ``d+1`` columns, where ``d`` is the number of scaling parameters in the `args` array.
+"""
+function Lar_s(args...)::Matrix
+	d = length(args)
+	mat = Matrix{Float64}(LinearAlgebra.I, d+1, d+1)
+	for k in range(1, length=d)
+		mat[k,k]=args[k]
+	end
+	return mat
+end
+
+"""
+	r(args...)::Matrix
+
+Return an *affine transformation Matrix* in homogeneous coordinates. Such `Rotation` Matrix has *dimension* either equal to 3 or to 4, for 2D and 3D rotation, respectively.
+The `{Number,1}` of `args` either contain a single `angle` parameter in *radiants*, or a vector with three elements, whose `norm` is the *rotation angle* in 3D and whose `normalized value` gives the direction of the *rotation axis* in 3D.
+"""
+function Lar_r(args...)::Matrix
+    args = collect(args)
+    n = length(args)
+    if n == 1 # rotation in 2D
+        angle = args[1]; COS = cos(angle); SIN = sin(angle)
+        mat = Matrix{Float64}(LinearAlgebra.I, 3, 3)
+        mat[1,1] = COS;    mat[1,2] = -SIN;
+        mat[2,1] = SIN;    mat[2,2] = COS;
+    end
+
+     if n == 3 # rotation in 3D
+        mat = Matrix{Float64}(LinearAlgebra.I, 4, 4)
+        angle = norm(args);
+        if norm(args) != 0.0
+			axis = args #normalize(args)
+			COS = cos(angle); SIN= sin(angle)
+			if axis[2]==axis[3]==0.0    # rotation about x
+				mat[2,2] = COS;    mat[2,3] = -SIN;
+				mat[3,2] = SIN;    mat[3,3] = COS;
+			elseif axis[1]==axis[3]==0.0   # rotation about y
+				mat[1,1] = COS;    mat[1,3] = SIN;
+				mat[3,1] = -SIN;    mat[3,3] = COS;
+			elseif axis[1]==axis[2]==0.0    # rotation about z
+				mat[1,1] = COS;    mat[1,2] = -SIN;
+				mat[2,1] = SIN;    mat[2,2] = COS;
+			else
+				I = Matrix{Float64}(LinearAlgebra.I, 3, 3); u = axis
+				Ux=[0 -u[3] u[2] ; u[3] 0 -u[1] ;  -u[2] u[1] 1]
+				UU =[u[1]*u[1]    u[1]*u[2]   u[1]*u[3];
+					 u[2]*u[1]    u[2]*u[2]   u[2]*u[3];
+					 u[3]*u[1]    u[3]*u[2]   u[3]*u[3]]
+				mat[1:3,1:3]=COS*I+SIN*Ux+(1.0-COS)*UU
+			end
+		end
+	end
+	return mat
+end
+
+
 
 mutable struct Struct
 	body::Array
