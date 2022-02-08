@@ -14,7 +14,7 @@ function mesh_color_from_rgb(V::Points,CV::Cells,rgb::Points;alpha=1.0)::GLMesh
 		end
 		# mesh building
 		unique!(sort!.(triangles))
-		mesh = mesh_color_from_rgb(V,triangles,rgb,alpha);
+		mesh = mesh_color_from_rgb(V,triangles,rgb; alpha = alpha);
 	end
 
 	n = size(V,1)  # space dimension

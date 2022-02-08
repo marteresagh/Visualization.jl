@@ -18,6 +18,7 @@ module Visualization
 	using DataStructures
 	import Base.∘
 	using Triangulate
+	using Combinatorics
 
 	# using Combinatorics
 	include("import_util_LAR.jl")
