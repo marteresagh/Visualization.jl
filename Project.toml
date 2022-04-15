@@ -1,7 +1,7 @@
 name = "Visualization"
 uuid = "878615e8-1e57-4109-874b-b1532cc25a7c"
 authors = ["marteresagh <marteresa28@gmail.com>"]
-version = "0.1.0"
+version = "1.0.0"
 
 [deps]
 Combinatorics = "861a8166-3701-5b0c-9a16-15d98fcdc6aa"
